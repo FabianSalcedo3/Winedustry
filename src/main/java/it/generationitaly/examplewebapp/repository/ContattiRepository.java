@@ -11,4 +11,6 @@ public interface ContattiRepository {
 	List<Contatti> findAll();
 	
 	void save(Contatti contatto);
+	
+	void update(Contatti contatto);
 }
