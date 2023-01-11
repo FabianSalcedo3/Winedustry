@@ -15,4 +15,6 @@ public interface ContattiRepository {
 	void update(Contatti contatto);
 	
 	void delete(Contatti contatto);
+	
+	Contatti findByTelefono(String telefono);
 }
