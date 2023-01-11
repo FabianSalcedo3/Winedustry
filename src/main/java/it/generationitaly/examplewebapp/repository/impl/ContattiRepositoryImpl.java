@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import it.generationitaly.examplewebapp.entity.Contatti;
-import it.generationitaly.examplewebapp.entity.Studente;
 import it.generationitaly.examplewebapp.repository.ContattiRepository;
 
 public class ContattiRepositoryImpl implements ContattiRepository {
