@@ -9,4 +9,6 @@ public interface ContattiRepository {
 	Contatti findById(int id);
 	
 	List<Contatti> findAll();
+	
+	void save(Contatti contatto);
 }
