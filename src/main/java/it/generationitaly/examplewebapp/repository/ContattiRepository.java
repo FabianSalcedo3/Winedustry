@@ -13,4 +13,6 @@ public interface ContattiRepository {
 	void save(Contatti contatto);
 	
 	void update(Contatti contatto);
+	
+	void delete(Contatti contatto);
 }

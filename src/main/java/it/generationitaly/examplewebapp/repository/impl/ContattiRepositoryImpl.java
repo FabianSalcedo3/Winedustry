@@ -98,4 +98,25 @@ public class ContattiRepositoryImpl implements ContattiRepository {
 		}
 	}
 
+	@Override
+	public void delete(Contatti contatto) {
+
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			em.remove(em.merge(contatto));
+			tx.commit();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			if (tx != null && tx.isActive())
+				tx.rollback();
+		} finally {
+			if (em != null)
+				em.close();
+		}
+	}
+
 }
