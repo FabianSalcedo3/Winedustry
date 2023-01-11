@@ -141,4 +141,26 @@ public class ContattiRepositoryImpl implements ContattiRepository {
 		return contatti;
 	}
 
+	@Override
+	public Contatti findByMail(String mail) {
+		Contatti contatti = null;
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			contatti = em.createQuery("from Contatti where email = :mail", Contatti.class).setParameter("mail", mail).getSingleResult();
+			tx.commit();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			if (tx != null && tx.isActive())
+				tx.rollback();
+		} finally {
+			if (em != null)
+				em.close();
+		}
+		return contatti;
+	}
+
 }

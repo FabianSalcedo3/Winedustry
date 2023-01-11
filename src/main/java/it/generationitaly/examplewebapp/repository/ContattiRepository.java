@@ -17,4 +17,6 @@ public interface ContattiRepository {
 	void delete(Contatti contatto);
 	
 	Contatti findByTelefono(String telefono);
+	
+	Contatti findByMail(String mail);
 }
