@@ -59,4 +59,24 @@ public class ContattiRepositoryImpl implements ContattiRepository {
 		return contatti;
 	}
 
+	@Override
+	public void update(Contatti contatto) {
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			em.merge(contatto);
+			tx.commit();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			if (tx != null && tx.isActive())
+				tx.rollback();
+		} finally {
+			if (em != null)
+				em.close();
+		}
+	}
+
 }
