@@ -8,11 +8,6 @@
 		<!-- Persistence provider -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Entity classes -->
-		<class>it.generationitaly.examplewebapp.entity.Studente</class>
-		<class>it.generationitaly.examplewebapp.entity.Corso</class>
-		<class>it.generationitaly.examplewebapp.entity.Esame</class>
-		<class>it.generationitaly.examplewebapp.entity.Utente</class>
-		<class>it.generationitaly.examplewebapp.entity.Contatti</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
