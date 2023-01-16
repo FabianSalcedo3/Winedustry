@@ -6,13 +6,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>it.generationitaly</groupId>
-	<artifactId>WinedustryOfficial</artifactId>
+	<artifactId>winedustry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
-	<name>examplewebapp Maven Webapp</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -72,7 +68,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>examplewebapp</finalName>
+		<finalName>winedustry</finalName>
 		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
 				defaults (may be moved to parent pom) -->
 			<plugins>
