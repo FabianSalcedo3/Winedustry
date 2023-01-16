@@ -1,6 +1,5 @@
 package it.generationitaly.winedustryofficial.entity;
 
-import entity.Prodotto;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,6 +1,6 @@
 package it.generationitaly.winedustryofficial.repository;
 
-import datasource.InterfaceDataSourceJPA;
-import entity.carrello.Carrello;
+
+import it.generationitaly.winedustryofficial.entity.Carrello;
 
 public interface InterfaceCarrelloJPA extends InterfaceDataSourceJPA<Carrello, Integer> {}

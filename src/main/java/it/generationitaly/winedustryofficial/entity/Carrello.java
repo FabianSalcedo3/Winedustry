@@ -1,6 +1,5 @@
 package it.generationitaly.winedustryofficial.entity;
 
-import entity.Utente;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
