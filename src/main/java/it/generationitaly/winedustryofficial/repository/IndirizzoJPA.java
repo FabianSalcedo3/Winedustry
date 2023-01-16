@@ -1,6 +1,7 @@
 package it.generationitaly.winedustryofficial.repository;
 
-import it.generationitaly.winedustryofficial.entity.Indirizzo;
+import datasource.DataSourceJPA;
+import entity.Indirizzo;
 
 public class IndirizzoJPA extends DataSourceJPA<Indirizzo, Integer> implements InterfaceIndirizzoJPA {
 

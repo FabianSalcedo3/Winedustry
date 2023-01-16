@@ -1,6 +1,7 @@
 package it.generationitaly.winedustryofficial.repository;
 
-import it.generationitaly.winedustryofficial.entity.Informazioni;
+import datasource.DataSourceJPA;
+import entity.Informazioni;
 
 public class InformazioniJPA extends DataSourceJPA<Informazioni, Integer> implements InterfaceInformazioniJPA {
 

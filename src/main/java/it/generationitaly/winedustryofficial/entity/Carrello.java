@@ -1,57 +1,25 @@
 package it.generationitaly.winedustryofficial.entity;
 
+import entity.Utente;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "carrello")
 public class Carrello {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@OneToOne
-	@JoinColumn(name = "vino_id")
-	private Utente utente;
+    @OneToOne
+    @JoinColumn(name = "vino_id")
+    private Utente utente;
 
-	@OneToMany(mappedBy = "carrello", fetch = FetchType.EAGER)
-	private List<CarrelloItem> carrelloItems = new ArrayList<>();
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Utente getUtente() {
-		return utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
-	public List<CarrelloItem> getCarrelloItems() {
-		return carrelloItems;
-	}
-
-	public void setCarrelloItems(List<CarrelloItem> carrelloItems) {
-		this.carrelloItems = carrelloItems;
-	}
+    @OneToMany(mappedBy = "carrello", fetch = FetchType.EAGER)
+    private List<CarrelloItem> carrelloItems = new ArrayList<>();
 
 }

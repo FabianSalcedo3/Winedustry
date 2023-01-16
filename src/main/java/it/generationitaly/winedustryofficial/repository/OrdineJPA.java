@@ -1,6 +1,7 @@
 package it.generationitaly.winedustryofficial.repository;
 
-import it.generationitaly.winedustryofficial.entity.Ordine;
+import datasource.DataSourceJPA;
+import entity.Ordine;
 
 
 public class OrdineJPA extends DataSourceJPA<Ordine, Integer> implements InterfaceOrdineJPA {

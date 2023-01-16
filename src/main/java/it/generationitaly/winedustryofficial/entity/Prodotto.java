@@ -1,107 +1,93 @@
 package it.generationitaly.winedustryofficial.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "vino")
+@Table(name = "prodotto")
 public class Prodotto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Column(name = "produttore", length = 50, nullable = false)
-	private String produttore;
+    @Column(name = "categoria", length = 50, nullable = false)
+    private String categoria;
 
-	@Column(name = "categoria", length = 50, nullable = false)
-	private String categoria;
+    @Column(name = "vitigno", length = 50, nullable = false)
+    private String vitigno;
 
-	@Column(name = "vitigno", length = 50, nullable = false)
-	private String vitigno;
+    @Column(name = "annata", nullable = false)
+    private int annata;
 
-	@Column(name = "annata", nullable = false)
-	private int annata;
+    @Column(name = "formato", nullable = false)
+    private double formato;
 
-	@Column(name = "formato", nullable = false)
-	private double formato;
+    @Column(name = "gradazione", nullable = false)
+    private int gradazione;
 
-	@Column(name = "gradazione", nullable = false)
-	private int gradazione;
+    @OneToOne
+    @JoinColumn(name = "regione_id")
+    private Regione regione;
 
-	@OneToOne
-	@JoinColumn(name = "regione_id")
-	private Regione regione;
+    public int getId() {
+        return id;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getCategoria() {
+        return categoria;
+    }
 
-	public String getProduttore() {
-		return produttore;
-	}
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
-	public void setProduttore(String produttore) {
-		this.produttore = produttore;
-	}
+    public String getVitigno() {
+        return vitigno;
+    }
 
-	public String getCategoria() {
-		return categoria;
-	}
+    public void setVitigno(String vitigno) {
+        this.vitigno = vitigno;
+    }
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
+    public int getAnnata() {
+        return annata;
+    }
 
-	public String getVitigno() {
-		return vitigno;
-	}
+    public void setAnnata(int annata) {
+        this.annata = annata;
+    }
 
-	public void setVitigno(String vitigno) {
-		this.vitigno = vitigno;
-	}
+    public double getFormato() {
+        return formato;
+    }
 
-	public int getAnnata() {
-		return annata;
-	}
+    public void setFormato(double formato) {
+        this.formato = formato;
+    }
 
-	public void setAnnata(int annata) {
-		this.annata = annata;
-	}
+    public int getGradazione() {
+        return gradazione;
+    }
 
-	public double getFormato() {
-		return formato;
-	}
+    public void setGradazione(int gradazione) {
+        this.gradazione = gradazione;
+    }
 
-	public void setFormato(double formato) {
-		this.formato = formato;
-	}
+    public Regione getRegione() {
+        return regione;
+    }
 
-	public int getGradazione() {
-		return gradazione;
-	}
+    public void setRegione(Regione regione) {
+        this.regione = regione;
+    }
 
-	public void setGradazione(int gradazione) {
-		this.gradazione = gradazione;
-	}
-
-	public Regione getRegione() {
-		return regione;
-	}
-
-	public void setRegione(Regione regione) {
-		this.regione = regione;
-	}
-
+    @Override
+    public String toString() {
+        return "Prodotto{" + "id=" + id + ", categoria='" + categoria + '\'' + ", vitigno='" + vitigno + '\'' + ", annata=" + annata + ", formato=" + formato + ", gradazione=" + gradazione + '}';
+    }
 }

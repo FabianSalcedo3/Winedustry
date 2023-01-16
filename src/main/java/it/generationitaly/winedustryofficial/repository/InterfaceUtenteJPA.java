@@ -1,5 +1,6 @@
 package it.generationitaly.winedustryofficial.repository;
 
-import it.generationitaly.winedustryofficial.entity.Utente;
+import datasource.InterfaceDataSourceJPA;
+import entity.Utente;
 
 public interface InterfaceUtenteJPA extends InterfaceDataSourceJPA<Utente, Integer> {}

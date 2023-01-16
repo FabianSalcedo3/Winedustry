@@ -1,101 +1,84 @@
 package it.generationitaly.winedustryofficial.entity;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "informazioni")
 public class Informazioni {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Column(name = "nome", length = 50, nullable = false)
-	private String nome;
+    @Column(name = "nome", length = 50, nullable = false)
+    private String nome;
 
-	@Column(name = "cognome", length = 50, nullable = false)
-	private String cognome;
+    @Column(name = "cognome", length = 50, nullable = false)
+    private String cognome;
 
-	@Column(name = "codice_fiscale", length = 16, unique = true, nullable = false)
-	private String codiceFiscale;
+    @Column(name = "codice_fiscale", length = 16, unique = true, nullable = false)
+    private String codiceFiscale;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascita", nullable = false)
-	private Date dataNascita;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_nascita", nullable = false)
+    private LocalDate dataNascita;
 
-	@Column(name = "telefono", nullable = false)
-	private long telefono;
+    @Column(name = "telefono", nullable = false)
+    private long telefono;
 
-	@OneToOne
-	@JoinColumn(name = "utente_id")
-	private Utente utente;
+    public int getId() {
+        return id;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getCognome() {
+        return cognome;
+    }
 
-	public String getCognome() {
-		return cognome;
-	}
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
 
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
+    public String getCodiceFiscale() {
+        return codiceFiscale;
+    }
 
-	public String getCodiceFiscale() {
-		return codiceFiscale;
-	}
+    public void setCodiceFiscale(String codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
+    }
 
-	public void setCodiceFiscale(String codiceFiscale) {
-		this.codiceFiscale = codiceFiscale;
-	}
+    public LocalDate getDataNascita() {
+        return dataNascita;
+    }
 
-	public Date getDataNascita() {
-		return dataNascita;
-	}
+    public void setDataNascita(LocalDate dataNascita) {
+        this.dataNascita = dataNascita;
+    }
 
-	public void setDataNascita(Date dataNascita) {
-		this.dataNascita = dataNascita;
-	}
+    public long getTelefono() {
+        return telefono;
+    }
 
-	public long getTelefono() {
-		return telefono;
-	}
+    public void setTelefono(long telefono) {
+        this.telefono = telefono;
+    }
 
-	public void setTelefono(long telefono) {
-		this.telefono = telefono;
-	}
-
-	public Utente getUtente() {
-		return utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
+    @Override
+    public String toString() {
+        return "Informazioni{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", codiceFiscale='" + codiceFiscale + '\'' + ", dataNascita=" + dataNascita + ", telefono=" + telefono + '}';
+    }
 }
