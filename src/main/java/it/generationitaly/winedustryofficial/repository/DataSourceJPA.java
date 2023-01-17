@@ -16,7 +16,7 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
     }
 
     private EntityManager getEntityManager() {
-        return Persistence.createEntityManagerFactory("persistenzaWinedustry").createEntityManager();
+        return Persistence.createEntityManagerFactory("persistence").createEntityManager();
     }
 
     @Override
@@ -114,7 +114,7 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            entities = em.createQuery("from " + entityClass.getName() + query, entityClass).setParameter(1, value).getResultList();
+            entities = em.createQuery("from " + entityClass.getName() + " " +query, entityClass).setParameter(1, value).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -131,7 +131,7 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            TypedQuery<T> typedQuery = em.createQuery("from " + entityClass.getName() + query, entityClass);
+            TypedQuery<T> typedQuery = em.createQuery("from " + entityClass.getName() + " " + query, entityClass);
             for (int i = 1; i <= nPar; i++) {
                 typedQuery.setParameter(i, values[i - 1]);
             }
@@ -151,7 +151,7 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
         EntityManager entityManager = getEntityManager();
         try {
             entityManager.getTransaction().begin();
-            entities = entityManager.createQuery("from " + entityClass.getName() + query, entityClass).setParameter(1, value).getSingleResult();
+            entities = entityManager.createQuery("from " + entityClass.getName() + " " + query, entityClass).setParameter(1, value).getSingleResult();
             entityManager.getTransaction().commit();
         } catch (PersistenceException persistenceException) {
             entityManager.getTransaction().rollback();

@@ -8,5 +8,9 @@
 </head>
 <body>
 	<a href="RegioniServlet?regioneID=1">Veneto</a>
+	<form action="RicercaProdottiServlet" method="get">
+		<input type="hidden" name="prodottoAnnata" value="1910">
+		<button type="submit">click</button>
+	</form>
 </body>
 </html>
