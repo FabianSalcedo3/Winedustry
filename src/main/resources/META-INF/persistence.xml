@@ -1,36 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/persistence">
-	<persistence-unit transaction-type="RESOURCE_LOCAL"
-		name="persistence">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit transaction-type="RESOURCE_LOCAL" name="persistence">
 		<!-- Persistence provider -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Entity classes -->
-		<class>it.generationitaly.winedustryofficial.entity.Carrello</class>
-		<class>it.generationitaly.winedustryofficial.entity.CarrelloItem</class>
-		<class>it.generationitaly.winedustryofficial.entity.Indirizzo</class>
-		<class>it.generationitaly.winedustryofficial.entity.Informazioni</class>
-		<class>it.generationitaly.winedustryofficial.entity.Ordine</class>
-		<class>it.generationitaly.winedustryofficial.entity.Pagamento</class>
-		<class>it.generationitaly.winedustryofficial.entity.Prodotto</class>
-		<class>it.generationitaly.winedustryofficial.entity.Regione</class>
-		<class>it.generationitaly.winedustryofficial.entity.Utente</class>
+		<class>entities.carrello.Carrello</class>
+		<class>entities.carrello.CarrelloItem</class>
+		<class>entities.Indirizzo</class>
+		<class>entities.Informazioni</class>
+		<class>entities.Ordine</class>
+		<class>entities.Pagamento</class>
+		<class>entities.Prodotto</class>
+		<class>entities.Regione</class>
+		<class>entities.Utente</class>
 		<properties>
-			<property name="javax.persistence.jdbc.driver"
-				value="com.mysql.cj.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/winedustry" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password"
-				value="admin" />
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.MySQL8Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="none" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.use_sql_comments" value="true" />
+			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/winedustry" />
+			<property name="jakarta.persistence.jdbc.user" value="profilatore" />
+			<property name="jakarta.persistence.jdbc.password" value="JAITA72" />
 		</properties>
 	</persistence-unit>
 </persistence>
