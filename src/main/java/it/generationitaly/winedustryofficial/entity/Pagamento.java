@@ -1,8 +1,15 @@
 package it.generationitaly.winedustryofficial.entity;
 
-import jakarta.persistence.*;
+import java.util.Date;
 
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "pagamento")
@@ -24,7 +31,7 @@ public class Pagamento {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_scadenza", nullable = false)
-    private LocalDate dataScadenza;
+    private Date dataScadenza;
 
     @Column(name = "cvv", nullable = false)
     private int cvv;
@@ -61,11 +68,11 @@ public class Pagamento {
         this.proprietario = proprietario;
     }
 
-    public LocalDate getDataScadenza() {
+    public Date getDataScadenza() {
         return dataScadenza;
     }
 
-    public void setDataScadenza(LocalDate dataScadenza) {
+    public void setDataScadenza(Date dataScadenza) {
         this.dataScadenza = dataScadenza;
     }
 

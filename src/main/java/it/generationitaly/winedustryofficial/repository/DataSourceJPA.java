@@ -1,11 +1,11 @@
 package it.generationitaly.winedustryofficial.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceException;
-import jakarta.persistence.TypedQuery;
-
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, PK> {
 

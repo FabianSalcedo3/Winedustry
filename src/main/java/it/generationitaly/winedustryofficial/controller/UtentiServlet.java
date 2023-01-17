@@ -1,15 +1,15 @@
-package it.generationitaly.winedustryofficial.servlet;
-
-import datasource.utente.UtenteJPA;
-import entity.Utente;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+package it.generationitaly.winedustryofficial.controller;
 
 import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
+
+import it.generationitaly.winedustryofficial.entity.Utente;
+import it.generationitaly.winedustryofficial.repository.UtenteJPA;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class UtentiServlet extends HttpServlet {
 

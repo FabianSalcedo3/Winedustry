@@ -1,8 +1,16 @@
 package it.generationitaly.winedustryofficial.entity;
 
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "informazioni")
@@ -24,7 +32,7 @@ public class Informazioni {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_nascita", nullable = false)
-    private LocalDate dataNascita;
+    private Date dataNascita;
 
     @Column(name = "telefono", nullable = false)
     private long telefono;
@@ -61,11 +69,11 @@ public class Informazioni {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public LocalDate getDataNascita() {
+    public Date getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(LocalDate dataNascita) {
+    public void setDataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
 
