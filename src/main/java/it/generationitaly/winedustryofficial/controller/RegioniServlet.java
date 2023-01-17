@@ -21,7 +21,7 @@ public class RegioniServlet extends HttpServlet {
         if (!req.getParameter("regioneID").isEmpty()) {
             Regione regione = new RegioneJPA(Regione.class).findById(Integer.parseInt(req.getParameter("regioneID")));
             req.setAttribute("regione", regione);
-            req.getRequestDispatcher("regioni.jsp").forward(req, resp);
+            req.getRequestDispatcher("regione.jsp").forward(req, resp);
         } else {
             resp.sendRedirect("index.jsp");
         }
