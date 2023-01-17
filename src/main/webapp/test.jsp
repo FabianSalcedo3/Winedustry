@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="RegioniServlet?regioneID=1">Veneto</a>
-	<form action="RicercaProdottiServlet" method="get">
-		<input type="hidden" name="prodottoAnnata" value="1910">
+	<form action="ProdottiServlet" method="post">
 		<button type="submit">click</button>
 	</form>
 </body>
