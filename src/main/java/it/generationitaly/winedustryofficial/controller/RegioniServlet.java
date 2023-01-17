@@ -7,10 +7,12 @@ import java.util.List;
 import it.generationitaly.winedustryofficial.entity.Regione;
 import it.generationitaly.winedustryofficial.repository.RegioneJPA;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@WebServlet("/RegioniServlet")
 public class RegioniServlet extends HttpServlet {
 
     @Serial
@@ -23,7 +25,7 @@ public class RegioniServlet extends HttpServlet {
             req.setAttribute("regione", regione);
             req.getRequestDispatcher("regione.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("test.jsp");
         }
     }
 
