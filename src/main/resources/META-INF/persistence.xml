@@ -8,6 +8,15 @@
 		<!-- Persistence provider -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Entity classes -->
+		<class>it.generationitaly.winedustryofficial.entity.Carrello</class>
+		<class>it.generationitaly.winedustryofficial.entity.CarrelloItem</class>
+		<class>it.generationitaly.winedustryofficial.entity.Indirizzo</class>
+		<class>it.generationitaly.winedustryofficial.entity.Informazioni</class>
+		<class>it.generationitaly.winedustryofficial.entity.Ordine</class>
+		<class>it.generationitaly.winedustryofficial.entity.Pagamento</class>
+		<class>it.generationitaly.winedustryofficial.entity.Prodotto</class>
+		<class>it.generationitaly.winedustryofficial.entity.Regione</class>
+		<class>it.generationitaly.winedustryofficial.entity.Utente</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
