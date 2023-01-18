@@ -1,7 +1,6 @@
 package entities;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +30,10 @@ public class Informazioni {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_nascita", nullable = false)
-    private Date dataNascita;
+    private LocalDate dataNascita;
 
     @Column(name = "telefono", nullable = false)
-    private long telefono;
+    private String telefono;
 
     public int getId() {
         return id;
@@ -68,19 +67,19 @@ public class Informazioni {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public Date getDataNascita() {
+    public LocalDate getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(Date dataNascita) {
+    public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

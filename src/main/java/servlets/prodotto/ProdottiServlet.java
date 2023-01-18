@@ -1,4 +1,4 @@
-package servlets;
+package servlets.prodotto;
 
 import java.io.IOException;
 import java.io.Serial;

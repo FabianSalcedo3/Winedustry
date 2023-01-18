@@ -1,4 +1,4 @@
-package servlets;
+package servlets.prodotto;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -67,7 +67,6 @@ public class RicercaProdottiServlet extends HttpServlet {
 		resp.sendRedirect("test.jsp");
 	}
 
-	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String value = req.getParameter("ricercaProdotto");
 		if (value != null && !value.isEmpty()) {

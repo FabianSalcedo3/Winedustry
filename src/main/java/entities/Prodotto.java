@@ -13,88 +13,112 @@ import jakarta.persistence.Table;
 @Table(name = "prodotto")
 public class Prodotto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 
-    @Column(name = "categoria", length = 50, nullable = false)
-    private String categoria;
+	@Column(name = "nome", length = 50, nullable = false)
+	private String nome;
 
-    @Column(name = "vitigno", length = 50, nullable = false)
-    private String vitigno;
+	@Column(name = "categoria", length = 50, nullable = false)
+	private String categoria;
 
-    @Column(name = "annata", nullable = false)
-    private int annata;
+	@Column(name = "vitigno", length = 50, nullable = false)
+	private String vitigno;
 
-    @Column(name = "formato", nullable = false)
-    private double formato;
+	@Column(name = "annata", nullable = false)
+	private int annata;
 
-    @Column(name = "gradazione", nullable = false)
-    private int gradazione;
+	@Column(name = "formato", nullable = false)
+	private double formato;
 
-    @OneToOne
-    @JoinColumn(name = "regione_id")
-    private Regione regione;
+	@Column(name = "gradazione", nullable = false)
+	private int gradazione;
 
-    public int getId() {
-        return id;
-    }
+	@Column(name = "immagine", nullable = false, length = 500)
+	private String immagine;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@OneToOne
+	@JoinColumn(name = "regione_id")
+	private Regione regione;
 
-    public String getCategoria() {
-        return categoria;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getVitigno() {
-        return vitigno;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setVitigno(String vitigno) {
-        this.vitigno = vitigno;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public int getAnnata() {
-        return annata;
-    }
+	public String getCategoria() {
+		return categoria;
+	}
 
-    public void setAnnata(int annata) {
-        this.annata = annata;
-    }
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 
-    public double getFormato() {
-        return formato;
-    }
+	public String getVitigno() {
+		return vitigno;
+	}
 
-    public void setFormato(double formato) {
-        this.formato = formato;
-    }
+	public void setVitigno(String vitigno) {
+		this.vitigno = vitigno;
+	}
 
-    public int getGradazione() {
-        return gradazione;
-    }
+	public int getAnnata() {
+		return annata;
+	}
 
-    public void setGradazione(int gradazione) {
-        this.gradazione = gradazione;
-    }
+	public void setAnnata(int annata) {
+		this.annata = annata;
+	}
 
-    public Regione getRegione() {
-        return regione;
-    }
+	public double getFormato() {
+		return formato;
+	}
 
-    public void setRegione(Regione regione) {
-        this.regione = regione;
-    }
+	public void setFormato(double formato) {
+		this.formato = formato;
+	}
 
-    @Override
-    public String toString() {
-        return "Prodotto{" + "id=" + id + ", categoria='" + categoria + '\'' + ", vitigno='" + vitigno + '\'' + ", annata=" + annata + ", formato=" + formato + ", gradazione=" + gradazione + '}';
-    }
+	public int getGradazione() {
+		return gradazione;
+	}
+
+	public void setGradazione(int gradazione) {
+		this.gradazione = gradazione;
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+
+	public Regione getRegione() {
+		return regione;
+	}
+
+	public void setRegione(Regione regione) {
+		this.regione = regione;
+	}
+
+	@Override
+	public String toString() {
+		return "Prodotto [id=" + id + ", nome=" + nome + ", categoria=" + categoria + ", vitigno=" + vitigno + ", annata=" + annata + ", formato=" + formato
+				+ ", gradazione=" + gradazione + ", immagine=" + immagine + "]";
+	}
+
 }
