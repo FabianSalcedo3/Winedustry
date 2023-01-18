@@ -18,7 +18,8 @@ public class UtentiServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!req.getParameter("utenteID").isEmpty()) {
+    	String utenteID = req.getParameter("utenteID");
+    	if (isValidString(utenteID)) {
             Utente utente = new UtenteJPA(Utente.class).findById(Integer.parseInt(req.getParameter("utenteID")));
             req.setAttribute("utente", utente);
             req.getRequestDispatcher("utenti.jsp").forward(req, resp);
@@ -37,4 +38,9 @@ public class UtentiServlet extends HttpServlet {
             resp.sendRedirect("index.jsp");
         }
     }
+    
+    private boolean isValidString(String value) {
+		return (value != null && !value.isEmpty());
+	}
+    
 }

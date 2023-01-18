@@ -13,28 +13,34 @@ import repository.regione.RegioneJPA;
 
 public class RegioniServlet extends HttpServlet {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+	@Serial
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!req.getParameter("regioneID").isEmpty()) {
-            Regione regione = new RegioneJPA(Regione.class).findById(Integer.parseInt(req.getParameter("regioneID")));
-            req.setAttribute("regione", regione);
-            req.getRequestDispatcher("regione.jsp").forward(req, resp);
-        } else {
-            resp.sendRedirect("test.jsp");
-        }
-    }
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String regioneID = req.getParameter("regioneID");
+		if (isValidString(regioneID)) {
+			Regione regione = new RegioneJPA(Regione.class).findById(Integer.parseInt(req.getParameter("regioneID")));
+			req.setAttribute("regione", regione);
+			req.getRequestDispatcher("regione.jsp").forward(req, resp);
+		} else {
+			resp.sendRedirect("test.jsp");
+		}
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Regione> regioni = new RegioneJPA(Regione.class).findAll();
-        if (!regioni.isEmpty()) {
-            req.setAttribute("regioni", regioni);
-            req.getRequestDispatcher("regioni.jsp").forward(req, resp);
-        } else {
-            resp.sendRedirect("index.jsp");
-        }
-    }
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<Regione> regioni = new RegioneJPA(Regione.class).findAll();
+		if (!regioni.isEmpty()) {
+			req.setAttribute("regioni", regioni);
+			req.getRequestDispatcher("regioni.jsp").forward(req, resp);
+		} else {
+			resp.sendRedirect("index.jsp");
+		}
+	}
+
+	private boolean isValidString(String value) {
+		return (value != null && !value.isEmpty());
+	}
+
 }

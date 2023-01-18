@@ -20,7 +20,8 @@ public class ProdottiServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if (!req.getParameter("prodottoID").isEmpty()) {
+		String prodottoID = req.getParameter("prodottoID");
+		if (isValidString(prodottoID)) {
 			Prodotto prodotto = new ProdottoJPA(Prodotto.class).findById(Integer.parseInt(req.getParameter("prodottoID")));
 			req.setAttribute("prodotto", prodotto);
 			req.getRequestDispatcher("prodotti.jsp").forward(req, resp);
@@ -39,4 +40,9 @@ public class ProdottiServlet extends HttpServlet {
 			resp.sendRedirect("test.jsp");
 		}
 	}
+	
+	private boolean isValidString(String value) {
+		return (value != null && !value.isEmpty());
+	}
+	
 }
