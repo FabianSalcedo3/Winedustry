@@ -28,46 +28,41 @@ public class InserisciInformazioniServlet extends HttpServlet {
 		String utenteCodiceFiscale = req.getParameter("utenteCodiceFiscale");
 		String utenteDataNascita = req.getParameter("utenteDataNascita");
 		String utenteTelefono = req.getParameter("utenteTelefono");
-		if (utenteID != null && !utenteID.isEmpty() && isInteger(utenteID)) {
+		if (isValidUser(utenteID)) {
 			Utente utente = new UtenteJPA(Utente.class).findById(Integer.parseInt(utenteID));
-			if (utente != null && utente.getInformazioni() == null) {
+			if (!existInformazioni(utente)) {
 				Informazioni informazioni = new Informazioni();
-				if (utenteNome != null && !utenteNome.isEmpty()) {
+				if (isValidString(utenteNome)) {
 					informazioni.setNome(utenteNome);
-				} else if (utenteCognome != null && !utenteCognome.isEmpty()) {
+				} else if (isValidString(utenteCognome)) {
 					informazioni.setCognome(utenteCognome);
-				} else if (utenteCodiceFiscale != null && !utenteCodiceFiscale.isEmpty()) {
+				} else if (isValidString(utenteCodiceFiscale)) {
 					informazioni.setCodiceFiscale(utenteCodiceFiscale);
-				} else if (utenteDataNascita != null && !utenteDataNascita.isEmpty()) {
+				} else if (isValidString(utenteDataNascita)) {
 					informazioni.setDataNascita(LocalDate.parse(utenteDataNascita));
-				} else if (utenteTelefono != null && !utenteTelefono.isEmpty()) {
+				} else if (isValidString(utenteTelefono)) {
 					informazioni.setTelefono(utenteTelefono);
 				}
 				informazioni.setId(utente.getId());
 				new InformazioniJPA(Informazioni.class).save(informazioni);
 				return;
-			} else if (utente != null && utente.getInformazioni() != null) {
+			} else if (existInformazioni(utente)) {
 				Informazioni informazioni = new InformazioniJPA(Informazioni.class).findById(utente.getInformazioni().getId());
-				if (utenteNome != null && !utenteNome.isEmpty()) {
+				if (isValidString(utenteNome)) {
 					informazioni.setNome(utenteNome);
-				} else if (utenteCognome != null && !utenteCognome.isEmpty()) {
+				} else if (isValidString(utenteCognome)) {
 					informazioni.setCognome(utenteCognome);
-				} else if (utenteCodiceFiscale != null && !utenteCodiceFiscale.isEmpty()) {
+				} else if (isValidString(utenteCodiceFiscale)) {
 					informazioni.setCodiceFiscale(utenteCodiceFiscale);
-				} else if (utenteDataNascita != null && !utenteDataNascita.isEmpty()) {
+				} else if (isValidString(utenteDataNascita)) {
 					informazioni.setDataNascita(LocalDate.parse(utenteDataNascita));
-				} else if (utenteTelefono != null && !utenteTelefono.isEmpty()) {
+				} else if (isValidString(utenteTelefono)) {
 					informazioni.setTelefono(utenteTelefono);
 				}
 				new InformazioniJPA(Informazioni.class).save(informazioni);
 			}
 		}
 		resp.sendRedirect("utente.jsp");
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 	}
 
 	private boolean isInteger(String value) {
@@ -77,6 +72,18 @@ public class InserisciInformazioniServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+
+	private boolean isValidUser(String id) {
+		return (id != null && !id.isEmpty() && isInteger(id));
+	}
+
+	private boolean isValidString(String value) {
+		return (value != null && !value.isEmpty());
+	}
+
+	private boolean existInformazioni(Utente utente) {
+		return (utente != null && utente.getInformazioni() == null);
 	}
 
 }

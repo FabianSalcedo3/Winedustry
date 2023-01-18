@@ -19,20 +19,20 @@ public class Informazioni {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "nome", length = 50, nullable = false)
+    @Column(name = "nome", length = 50)
     private String nome;
 
-    @Column(name = "cognome", length = 50, nullable = false)
+    @Column(name = "cognome", length = 50)
     private String cognome;
 
-    @Column(name = "codice_fiscale", length = 16, unique = true, nullable = false)
+    @Column(name = "codice_fiscale", length = 16, unique = true)
     private String codiceFiscale;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_nascita", nullable = false)
+    @Column(name = "data_nascita")
     private LocalDate dataNascita;
 
-    @Column(name = "telefono", nullable = false)
+    @Column(name = "telefono", length = 10)
     private String telefono;
 
     public int getId() {
