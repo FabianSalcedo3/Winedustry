@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="RicercaProdottiServlet?prodottoAnnata=1910">Test Annata As String</a>
-	<form action="ProdottiServlet" method="post">
+	<a href="RegioniServlet?regioneID=1">Veneto</a>
+	<form action="RicercaProdottiServlet" method="post">
+		<input type="hidden" name="ricercaProdotto" value="r">
 		<button type="submit">click</button>
 	</form>
 </body>
