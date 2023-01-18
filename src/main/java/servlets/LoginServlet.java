@@ -8,12 +8,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import entities.Utente;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import repository.utente.UtenteJPA;
 
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
 	@Serial
@@ -28,8 +30,7 @@ public class LoginServlet extends HttpServlet {
 		response.sendRedirect("login.jsp");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		AtomicReference<String> username = new AtomicReference<>();
 		String password = request.getParameter("password");

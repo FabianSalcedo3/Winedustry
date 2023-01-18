@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="RicercaProdottiServlet?prodottoAnnata=1910">Test Annata As String</a>
 	<form action="ProdottiServlet" method="post">
 		<button type="submit">click</button>
 	</form>
