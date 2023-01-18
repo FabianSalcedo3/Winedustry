@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import entities.Prodotto;
+import entities.Utente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,35 +29,35 @@ public class RicercaProdottiServlet extends HttpServlet {
 		String prodottoCategoriaAsString = req.getParameter("prodottoCategoria");
 		String prodottoVitignoAsString = req.getParameter("prodottoVitigno");
 
-		if (prodottoAnnataAsString != null && !prodottoAnnataAsString.isEmpty() && isInteger(prodottoAnnataAsString)) {
+		if (isValidInteger(prodottoVitignoAsString)) {
 			List<Prodotto> prodottiByAnnata = new ProdottoJPA(Prodotto.class).findBySomethingList("where annata = ?1", prodottoAnnataAsString);
 			if (!prodottiByAnnata.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByAnnata);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (prodottoFormatoAsString != null && !prodottoFormatoAsString.isEmpty() && isDouble(prodottoFormatoAsString)) {
+		} else if (isValidDouble(prodottoFormatoAsString)) {
 			List<Prodotto> prodottiByFormato = new ProdottoJPA(Prodotto.class).findBySomethingList("where formato = ?1", prodottoFormatoAsString);
 			if (!prodottiByFormato.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByFormato);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (prodottoGradazioneAsString != null && !prodottoGradazioneAsString.isEmpty() && isInteger(prodottoGradazioneAsString)) {
+		} else if (isValidInteger(prodottoGradazioneAsString)) {
 			List<Prodotto> prodottiByGradazione = new ProdottoJPA(Prodotto.class).findBySomethingList("where gradazione = ?1", prodottoGradazioneAsString);
 			if (!prodottiByGradazione.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByGradazione);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (prodottoCategoriaAsString != null && !prodottoCategoriaAsString.isEmpty()) {
+		} else if (isValidString(prodottoCategoriaAsString)) {
 			List<Prodotto> prodottiByCategoria = new ProdottoJPA(Prodotto.class).findBySomethingList("where categoria = ?1", prodottoCategoriaAsString);
 			if (!prodottiByCategoria.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByCategoria);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (prodottoVitignoAsString != null && !prodottoVitignoAsString.isEmpty()) {
+		} else if (isValidString(prodottoVitignoAsString)) {
 			List<Prodotto> prodottiByVitigno = new ProdottoJPA(Prodotto.class).findBySomethingList("where vitigno = ?1", prodottoVitignoAsString);
 			if (!prodottiByVitigno.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByVitigno);
@@ -121,6 +122,18 @@ public class RicercaProdottiServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+	
+	private boolean isValidString(String value) {
+		return (value != null && !value.isEmpty());
+	}
+
+	private boolean isValidInteger(String value) {
+		return (value != null && !value.isEmpty() && isInteger(value));
+	}
+	
+	private boolean isValidDouble(String value) {
+		return (value != null && !value.isEmpty() && isDouble(value));
 	}
 
 }
