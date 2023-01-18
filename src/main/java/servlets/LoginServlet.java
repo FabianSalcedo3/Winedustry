@@ -31,51 +31,51 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		AtomicReference<String> username = new AtomicReference<>();
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		AtomicReference<String> usernameTemp = new AtomicReference<>();
 		List<Utente> utenti = new UtenteJPA(Utente.class).findAll();
-		AtomicBoolean isValidateEmail = new AtomicBoolean(false);
+		AtomicBoolean isValidateUsername = new AtomicBoolean(false);
 		AtomicBoolean isValidatePassword = new AtomicBoolean(false);
-		if (email.isEmpty() && password.isEmpty()) {
-			request.setAttribute("validationEmail", "is-invalid");
+		if (username.isEmpty() && password.isEmpty()) {
+			request.setAttribute("validationUsername", "is-invalid");
 			request.setAttribute("validationPassword", "is-invalid");
-			request.setAttribute("errorMailLogin", "Inserisci una e-mail!");
+			request.setAttribute("errorUsernameLogin", "Inserisci un username!");
 			request.setAttribute("errorPasswordLogin", "Inserisci una password!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
-		} else if (email.isEmpty()) {
-			request.setAttribute("validationEmail", "is-invalid");
-			request.setAttribute("errorUserLogin", "Inserisci una e-mail!");
+		} else if (username.isEmpty()) {
+			request.setAttribute("validationUsername", "is-invalid");
+			request.setAttribute("errorUserLogin", "Inserisci un username!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
 		}
 		utenti.forEach(utente -> {
-			if (utente.getEmail().equals(email)) {
-				isValidateEmail.set(true);
+			if (utente.getUsername().equals(username)) {
+				isValidateUsername.set(true);
 				if (utente.getPassword().equals(password)) {
 					isValidatePassword.set(true);
-					username.set(utente.getEmail());
+					usernameTemp.set(utente.getUsername());
 				}
 			}
 		});
-		if (!isValidateEmail.get()) {
-			request.setAttribute("validationEmail", "is-invalid");
-			request.setAttribute("errorMailLogin", "E-mail non trovata!");
+		if (!isValidateUsername.get()) {
+			request.setAttribute("validationUsername", "is-invalid");
+			request.setAttribute("errorUsernameLogin", "Username non trovato!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else if (!isValidatePassword.get()) {
 			request.setAttribute("validationPassword", "is-invalid");
 			request.setAttribute("errorPasswordLogin", "Password errata!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
-		} else if (isValidateEmail.get() && isValidatePassword.get()) {
+		} else if (isValidateUsername.get() && isValidatePassword.get()) {
 			HttpSession oldSession = request.getSession(false);
 			if (oldSession != null) {
 				oldSession.invalidate();
 			}
 			HttpSession currentSession = request.getSession();
-			currentSession.setAttribute("user", username.get());
+			currentSession.setAttribute("user", usernameTemp.get());
 			currentSession.setMaxInactiveInterval(15 * 60);
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("home/home.jsp");
 		}
 	}
 
