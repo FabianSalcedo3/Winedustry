@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 		if (oldSession != null) {
 			oldSession.invalidate();
 		}
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("login/registrazione.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,12 +42,12 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("validationPassword", "is-invalid");
 			request.setAttribute("errorUsernameLogin", "Inserisci un username!");
 			request.setAttribute("errorPasswordLogin", "Inserisci una password!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("login/registrazione.jsp").forward(request, response);
 			return;
 		} else if (username.isEmpty()) {
 			request.setAttribute("validationUsername", "is-invalid");
 			request.setAttribute("errorUserLogin", "Inserisci un username!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("login/registrazione.jsp").forward(request, response);
 			return;
 		}
 		utenti.forEach(utente -> {
@@ -62,11 +62,11 @@ public class LoginServlet extends HttpServlet {
 		if (!isValidateUsername.get()) {
 			request.setAttribute("validationUsername", "is-invalid");
 			request.setAttribute("errorUsernameLogin", "Username non trovato!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("login/registrazione.jsp").forward(request, response);
 		} else if (!isValidatePassword.get()) {
 			request.setAttribute("validationPassword", "is-invalid");
 			request.setAttribute("errorPasswordLogin", "Password errata!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("login/registrazione.jsp").forward(request, response);
 		} else if (isValidateUsername.get() && isValidatePassword.get()) {
 			HttpSession oldSession = request.getSession(false);
 			if (oldSession != null) {

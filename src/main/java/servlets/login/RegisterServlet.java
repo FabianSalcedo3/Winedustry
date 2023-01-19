@@ -1,5 +1,8 @@
 package servlets.login;
 
+import java.io.IOException;
+import java.io.Serial;
+
 import entities.Utente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,12 +13,13 @@ import jakarta.servlet.http.HttpSession;
 import repository.utente.UtenteJPA;
 import utils.InterfaceStringValidation;
 
-import java.io.IOException;
-
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
+	
+	@Serial
+    private static final long serialVersionUID = 1L;
 
-    @Override
+	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
@@ -44,27 +48,27 @@ public class RegisterServlet extends HttpServlet {
                         } else {
                             req.setAttribute("invalidEmail", "Email già utilizzata");
                             req.setAttribute("isInvalidEmail", isInvalid);
-                            req.getRequestDispatcher("login.jsp").forward(req, resp);
+                            req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
                         }
                     } else {
                         req.setAttribute("invalidUsername", "Username non disponibile");
                         req.setAttribute("isInvalidUsername", isInvalid);
-                        req.getRequestDispatcher("login.jsp").forward(req, resp);
+                        req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
                     }
                 } else {
                     req.setAttribute("invalidEmail", "Inserisci una email");
                     req.setAttribute("isInvalidEmail", isInvalid);
-                    req.getRequestDispatcher("login.jsp").forward(req, resp);
+                    req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
                 }
             } else {
                 req.setAttribute("invalidPassword", "Inserisci una password");
                 req.setAttribute("isInvalidPassword", isInvalid);
-                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
             }
         } else {
             req.setAttribute("invalidUsername", "Inserisci un username");
             req.setAttribute("isInvalidUsername", isInvalid);
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
         }
     }
 
