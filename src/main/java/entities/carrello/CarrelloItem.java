@@ -12,58 +12,63 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "carrello_item")
-public class CarrelloItem {
+public class CarrelloItem extends Carrello {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Column(name = "quantita", nullable = false)
-	private int quantita;
+    @Column(name = "quantita", nullable = false)
+    private int quantita;
 
-	@OneToOne
-	@JoinColumn(name = "prodotto_id")
-	private Prodotto prodotto;
+    @OneToOne
+    @JoinColumn(name = "prodotto_id")
+    private Prodotto prodotto;
 
-	@OneToOne
-	@JoinColumn(name = "carrello_id")
-	private Carrello carrello;
+    @OneToOne
+    @JoinColumn(name = "carrello_id")
+    private Carrello carrello;
 
-	public int getId() {
-		return id;
-	}
+    public CarrelloItem(int id) {
+        super(id);
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getQuantita() {
-		return quantita;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setQuantita(int quantita) {
-		this.quantita = quantita;
-	}
+    public int getQuantita() {
+        return quantita;
+    }
 
-	public Prodotto getProdotto() {
-		return prodotto;
-	}
+    public void setQuantita(int quantita) {
+        this.quantita = quantita;
+    }
 
-	public void setProdotto(Prodotto prodotto) {
-		this.prodotto = prodotto;
-	}
+    public Prodotto getProdotto() {
+        return prodotto;
+    }
 
-	public Carrello getCarrello() {
-		return carrello;
-	}
+    public void setProdotto(Prodotto prodotto) {
+        this.prodotto = prodotto;
+    }
 
-	public void setCarrello(Carrello carrello) {
-		this.carrello = carrello;
-	}
+    public Carrello getCarrello() {
+        return carrello;
+    }
 
-	@Override
-	public String toString() {
-		return "CarrelloItem{" + "id=" + id + ", quantita=" + quantita + '}';
-	}
+    public void setCarrello(Carrello carrello) {
+        this.carrello = carrello;
+    }
+
+    @Override
+    public String toString() {
+        return "CarrelloItem{" + "id=" + id + ", quantita=" + quantita + '}';
+    }
 }
