@@ -32,6 +32,7 @@ public class RegisterServlet extends HttpServlet {
                     if (isValidUsername(username)) {
                         if (isValidEmail(email)) {
                             Utente utente = new Utente(email, username, password);
+                            new UtenteJPA(Utente.class).save(utente);
                             HttpSession oldSession = req.getSession(false);
                             if (oldSession != null) {
                                 oldSession.invalidate();
