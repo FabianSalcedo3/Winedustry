@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 import entities.Informazioni;
 import entities.Utente;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

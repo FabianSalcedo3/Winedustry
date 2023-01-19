@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.utente.UtenteJPA;
+import utils.InterfaceStringValidation;
 
 public class UtentiServlet extends HttpServlet {
 
@@ -19,7 +20,7 @@ public class UtentiServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String utenteID = req.getParameter("utenteID");
-    	if (isValidString(utenteID)) {
+    	if (InterfaceStringValidation.isValidString(utenteID)) {
             Utente utente = new UtenteJPA(Utente.class).findById(Integer.parseInt(req.getParameter("utenteID")));
             req.setAttribute("utente", utente);
             req.getRequestDispatcher("utenti.jsp").forward(req, resp);
@@ -38,9 +39,6 @@ public class UtentiServlet extends HttpServlet {
             resp.sendRedirect("index.jsp");
         }
     }
-    
-    private boolean isValidString(String value) {
-		return (value != null && !value.isEmpty());
-	}
+   
     
 }
