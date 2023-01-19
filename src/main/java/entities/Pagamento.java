@@ -2,14 +2,7 @@ package entities;
 
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pagamento")
@@ -35,6 +28,10 @@ public class Pagamento {
 
     @Column(name = "cvv", nullable = false)
     private int cvv;
+
+    @OneToOne
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
     public int getId() {
         return id;
@@ -76,16 +73,24 @@ public class Pagamento {
         this.dataScadenza = dataScadenza;
     }
 
-    public int getCcv() {
+    public int getCvv() {
         return cvv;
     }
 
-    public void setCcv(int ccv) {
-        this.cvv = ccv;
+    public void setCvv(int cvv) {
+        this.cvv = cvv;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
 
     @Override
     public String toString() {
-        return "Pagamento{" + "id=" + id + ", carta='" + carta + '\'' + ", circuito='" + circuito + '\'' + ", proprietario='" + proprietario + '\'' + ", dataScadenza=" + dataScadenza + ", ccv=" + cvv + '}';
+        return "Pagamento{" + "id=" + id + ", carta='" + carta + '\'' + ", circuito='" + circuito + '\'' + ", proprietario='" + proprietario + '\'' + ", dataScadenza=" + dataScadenza + ", cvv=" + cvv + '}';
     }
 }

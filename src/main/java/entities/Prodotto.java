@@ -21,23 +21,35 @@ public class Prodotto {
 	@Column(name = "nome", length = 50, nullable = false)
 	private String nome;
 
-	@Column(name = "categoria", length = 50, nullable = false)
+	@Column(name = "categoria", length = 50)
 	private String categoria;
 
 	@Column(name = "vitigno", length = 50, nullable = false)
 	private String vitigno;
 
-	@Column(name = "annata", nullable = false)
+	@Column(name = "annata")
 	private int annata;
 
-	@Column(name = "formato", nullable = false)
+	@Column(name = "formato")
 	private double formato;
 
-	@Column(name = "gradazione", nullable = false)
+	@Column(name = "gradazione")
 	private int gradazione;
 
-	@Column(name = "immagine", nullable = false, length = 500)
+	@Column(name = "prezzo", nullable = false)
+	private double prezzo;
+
+	@Column(name = "denominazione", length = 50)
+	private String denominazione;
+
+	@Column(name = "valutazione")
+	private int valutazione;
+
+	@Column(name = "immagine", length = 500)
 	private String immagine;
+
+	@Column(name = "descrizione", length = 5000)
+	private String descrizione;
 
 	@OneToOne
 	@JoinColumn(name = "regione_id")
@@ -99,12 +111,44 @@ public class Prodotto {
 		this.gradazione = gradazione;
 	}
 
+	public double getPrezzo() {
+		return prezzo;
+	}
+
+	public void setPrezzo(double prezzo) {
+		this.prezzo = prezzo;
+	}
+
+	public String getDenominazione() {
+		return denominazione;
+	}
+
+	public void setDenominazione(String denominazione) {
+		this.denominazione = denominazione;
+	}
+
+	public int getValutazione() {
+		return valutazione;
+	}
+
+	public void setValutazione(int valutazione) {
+		this.valutazione = valutazione;
+	}
+
 	public String getImmagine() {
 		return immagine;
 	}
 
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public Regione getRegione() {
@@ -117,8 +161,6 @@ public class Prodotto {
 
 	@Override
 	public String toString() {
-		return "Prodotto [id=" + id + ", nome=" + nome + ", categoria=" + categoria + ", vitigno=" + vitigno + ", annata=" + annata + ", formato=" + formato
-				+ ", gradazione=" + gradazione + ", immagine=" + immagine + "]";
+		return "Prodotto{" + "id=" + id + ", nome='" + nome + '\'' + ", categoria='" + categoria + '\'' + ", vitigno='" + vitigno + '\'' + ", annata=" + annata + ", formato=" + formato + ", gradazione=" + gradazione + ", prezzo=" + prezzo + ", denominazione='" + denominazione + '\'' + ", valutazione=" + valutazione + ", immagine='" + immagine + '\'' + ", descrizione='" + descrizione + '\'' + '}';
 	}
-
 }

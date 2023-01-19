@@ -1,13 +1,10 @@
 package entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import entities.carrello.Carrello;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "utente")
@@ -27,17 +24,20 @@ public class Utente {
     @Column(name = "password", length = 20, nullable = false)
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "indirizzo_id")
+    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
     private Indirizzo indirizzo;
 
-    @OneToOne
-    @JoinColumn(name = "informazioni_id")
+    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
     private Informazioni informazioni;
 
-    @OneToOne
-    @JoinColumn(name = "pagamento_id")
-    private Pagamento pagamento;
+    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
+    private Carrello carrello;
+
+    @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
+    private List<Ordine> ordini = new ArrayList<>();
+
+    @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
+    private List<Pagamento> pagamenti = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -87,12 +87,28 @@ public class Utente {
         this.informazioni = informazioni;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
+    public Carrello getCarrello() {
+        return carrello;
     }
 
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
+    public void setCarrello(Carrello carrello) {
+        this.carrello = carrello;
+    }
+
+    public List<Ordine> getOrdini() {
+        return ordini;
+    }
+
+    public void setOrdini(List<Ordine> ordini) {
+        this.ordini = ordini;
+    }
+
+    public List<Pagamento> getPagamenti() {
+        return pagamenti;
+    }
+
+    public void setPagamenti(List<Pagamento> pagamenti) {
+        this.pagamenti = pagamenti;
     }
 
     @Override

@@ -3,14 +3,8 @@ package entities.carrello;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import entities.Utente;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "carrello")
@@ -21,6 +15,10 @@ public class Carrello {
 	@Column(name = "id")
 	private int id;
 
+	@OneToOne
+	@JoinColumn(name = "utente_id")
+	private Utente utente;
+
 	@OneToMany(mappedBy = "carrello", fetch = FetchType.EAGER)
 	private List<CarrelloItem> carrelloItems = new ArrayList<>();
 
@@ -30,6 +28,14 @@ public class Carrello {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	public List<CarrelloItem> getCarrelloItems() {

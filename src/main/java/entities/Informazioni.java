@@ -1,14 +1,8 @@
 package entities;
 
 import java.time.LocalDate;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "informazioni")
@@ -34,6 +28,10 @@ public class Informazioni {
 
 	@Column(name = "telefono", length = 10)
 	private String telefono;
+
+	@OneToOne
+	@JoinColumn(name = "utente_id")
+	private Utente utente;
 
 	public int getId() {
 		return id;
@@ -83,10 +81,16 @@ public class Informazioni {
 		this.telefono = telefono;
 	}
 
-	@Override
-	public String toString() {
-		return "Informazioni [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", codiceFiscale=" + codiceFiscale + ", dataNascita=" + dataNascita
-				+ ", telefono=" + telefono + "]";
+	public Utente getUtente() {
+		return utente;
 	}
 
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
+
+	@Override
+	public String toString() {
+		return "Informazioni{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", codiceFiscale='" + codiceFiscale + '\'' + ", dataNascita=" + dataNascita + ", telefono='" + telefono + '\'' + '}';
+	}
 }

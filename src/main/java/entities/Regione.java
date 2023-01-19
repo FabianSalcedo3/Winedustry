@@ -16,78 +16,76 @@ import jakarta.persistence.Table;
 @Table(name = "regione")
 public class Regione {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Column(name = "nome", length = 50, nullable = false)
-	private String nome;
+    @Column(name = "nome", length = 50)
+    private String nome;
 
-	@Column(name = "capoluogo", length = 50, nullable = false)
-	private String capoluogo;
+    @Column(name = "capoluogo", length = 50)
+    private String capoluogo;
 
-	@OneToMany(mappedBy = "regione", fetch = FetchType.EAGER)
-	private List<Prodotto> vini = new ArrayList<>();
+    @Column(name = "descrizione", length = 5000)
+    private String descrizione;
 
-	@Column(name = "descrizione", nullable = false, length = 6000)
-	private String descrizione;
+    @Column(name = "immagine", length = 500)
+    private String immagine;
 
-	@Column(name = "immagine", nullable = false, length = 2000)
-	private String immagine;
+    @OneToMany(mappedBy = "regione", fetch = FetchType.EAGER)
+    private List<Prodotto> vini = new ArrayList<>();
 
-	public String getImmagine() {
-		return immagine;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setImmagine(String immagine) {
-		this.immagine = immagine;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getDescrizione() {
-		return descrizione;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setDescrizione(String descrizione) {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-		this.descrizione = descrizione;
-	}
+    public String getCapoluogo() {
+        return capoluogo;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setCapoluogo(String capoluogo) {
+        this.capoluogo = capoluogo;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getDescrizione() {
+        return descrizione;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getImmagine() {
+        return immagine;
+    }
 
-	public String getCapoluogo() {
-		return capoluogo;
-	}
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
+    }
 
-	public void setCapoluogo(String capoluogo) {
-		this.capoluogo = capoluogo;
-	}
+    public List<Prodotto> getVini() {
+        return vini;
+    }
 
-	public List<Prodotto> getVini() {
-		return vini;
-	}
+    public void setVini(List<Prodotto> vini) {
+        this.vini = vini;
+    }
 
-	public void setVini(List<Prodotto> vini) {
-		this.vini = vini;
-	}
-
-	@Override
-	public String toString() {
-		return "Regione{" + "id=" + id + ", nome='" + nome + '\'' + ", capoluogo='" + capoluogo + '\'' + '}';
-	}
-
+    @Override
+    public String toString() {
+        return "Regione{" + "id=" + id + ", nome='" + nome + '\'' + ", capoluogo='" + capoluogo + '\'' + ", descrizione='" + descrizione + '\'' + ", immagine='" + immagine + '\'' + '}';
+    }
 }
