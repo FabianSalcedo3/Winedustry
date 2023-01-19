@@ -39,6 +39,16 @@ public class Utente {
     @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
     private List<Pagamento> pagamenti = new ArrayList<>();
 
+    public Utente() {
+        super();
+    }
+
+    public Utente(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }
