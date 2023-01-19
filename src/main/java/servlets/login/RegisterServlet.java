@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import repository.utente.UtenteJPA;
 import utils.InterfaceStringValidation;
 
@@ -31,8 +32,14 @@ public class RegisterServlet extends HttpServlet {
                     if (isValidUsername(username)) {
                         if (isValidEmail(email)) {
                             Utente utente = new Utente(email, username, password);
-                            req.getSession().setAttribute("user", utente.getUsername());
-                            resp.sendRedirect("home.jsp");
+                            HttpSession oldSession = req.getSession(false);
+                            if (oldSession != null) {
+                                oldSession.invalidate();
+                            }
+                            HttpSession currentSession = req.getSession();
+                            currentSession.setAttribute("user", utente.getUsername());
+                            currentSession.setMaxInactiveInterval(15 * 60);
+                            resp.sendRedirect("home/home.jsp");
                         } else {
                             req.setAttribute("invalidEmail", "Email già utilizzata");
                             req.setAttribute("isInvalidEmail", isInvalid);
