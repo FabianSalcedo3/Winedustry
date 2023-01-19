@@ -8,89 +8,102 @@ import jakarta.persistence.*;
 @Table(name = "informazioni")
 public class Informazioni {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Column(name = "nome", length = 50)
-	private String nome;
+    @Column(name = "nome", length = 50)
+    private String nome;
 
-	@Column(name = "cognome", length = 50)
-	private String cognome;
+    @Column(name = "cognome", length = 50)
+    private String cognome;
 
-	@Column(name = "codice_fiscale", length = 16, unique = true)
-	private String codiceFiscale;
+    @Column(name = "codice_fiscale", length = 16, unique = true)
+    private String codiceFiscale;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascita")
-	private LocalDate dataNascita;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_nascita")
+    private LocalDate dataNascita;
 
-	@Column(name = "telefono", length = 10)
-	private String telefono;
+    @Column(name = "telefono", length = 10)
+    private String telefono;
 
-	@OneToOne
-	@JoinColumn(name = "utente_id")
-	private Utente utente;
+    @OneToOne
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
-	public int getId() {
-		return id;
-	}
+    public Informazioni() {
+        super();
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Informazioni(String nome, String cognome, String codiceFiscale, LocalDate dataNascita, String telefono, Utente utente) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.codiceFiscale = codiceFiscale;
+        this.dataNascita = dataNascita;
+        this.telefono = telefono;
+        this.utente = utente;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getCognome() {
-		return cognome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getCodiceFiscale() {
-		return codiceFiscale;
-	}
+    public String getCognome() {
+        return cognome;
+    }
 
-	public void setCodiceFiscale(String codiceFiscale) {
-		this.codiceFiscale = codiceFiscale;
-	}
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
 
-	public LocalDate getDataNascita() {
-		return dataNascita;
-	}
+    public String getCodiceFiscale() {
+        return codiceFiscale;
+    }
 
-	public void setDataNascita(LocalDate dataNascita) {
-		this.dataNascita = dataNascita;
-	}
+    public void setCodiceFiscale(String codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public LocalDate getDataNascita() {
+        return dataNascita;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public void setDataNascita(LocalDate dataNascita) {
+        this.dataNascita = dataNascita;
+    }
 
-	public Utente getUtente() {
-		return utente;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-	@Override
-	public String toString() {
-		return "Informazioni{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", codiceFiscale='" + codiceFiscale + '\'' + ", dataNascita=" + dataNascita + ", telefono='" + telefono + '\'' + '}';
-	}
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+    @Override
+    public String toString() {
+        return "Informazioni{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", codiceFiscale='" + codiceFiscale + '\'' + ", dataNascita=" + dataNascita + ", telefono='" + telefono + '\'' + '}';
+    }
 }

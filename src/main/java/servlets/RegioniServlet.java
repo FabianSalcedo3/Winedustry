@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.regione.RegioneJPA;
+import utils.InterfaceStringValidation;
 
 public class RegioniServlet extends HttpServlet {
 
@@ -19,7 +20,7 @@ public class RegioniServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String regioneID = req.getParameter("regioneID");
-		if (isValidString(regioneID)) {
+		if (InterfaceStringValidation.isValidString(regioneID)) {
 			Regione regione = new RegioneJPA(Regione.class).findById(Integer.parseInt(req.getParameter("regioneID")));
 			req.setAttribute("regione", regione);
 			req.getRequestDispatcher("regione.jsp").forward(req, resp);
@@ -39,8 +40,5 @@ public class RegioniServlet extends HttpServlet {
 		}
 	}
 
-	private boolean isValidString(String value) {
-		return (value != null && !value.isEmpty());
-	}
 
 }
