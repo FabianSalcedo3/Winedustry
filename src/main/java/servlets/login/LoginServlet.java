@@ -1,4 +1,4 @@
-package servlets;
+package servlets.login;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -22,32 +22,32 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession oldSession = request.getSession(false);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession oldSession = req.getSession(false);
 		if (oldSession != null) {
 			oldSession.invalidate();
 		}
-		response.sendRedirect("login.jsp");
+		resp.sendRedirect("login.jsp");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
 		AtomicReference<String> usernameTemp = new AtomicReference<>();
 		List<Utente> utenti = new UtenteJPA(Utente.class).findAll();
 		AtomicBoolean isValidateUsername = new AtomicBoolean(false);
 		AtomicBoolean isValidatePassword = new AtomicBoolean(false);
 		if (username.isEmpty() && password.isEmpty()) {
-			request.setAttribute("validationUsername", "is-invalid");
-			request.setAttribute("validationPassword", "is-invalid");
-			request.setAttribute("errorUsernameLogin", "Inserisci un username!");
-			request.setAttribute("errorPasswordLogin", "Inserisci una password!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			req.setAttribute("validationUsername", "is-invalid");
+			req.setAttribute("validationPassword", "is-invalid");
+			req.setAttribute("errorUsernameLogin", "Inserisci un username!");
+			req.setAttribute("errorPasswordLogin", "Inserisci una password!");
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
 			return;
 		} else if (username.isEmpty()) {
-			request.setAttribute("validationUsername", "is-invalid");
-			request.setAttribute("errorUserLogin", "Inserisci un username!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			req.setAttribute("validationUsername", "is-invalid");
+			req.setAttribute("errorUserLogin", "Inserisci un username!");
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
 			return;
 		}
 		utenti.forEach(utente -> {
@@ -60,22 +60,22 @@ public class LoginServlet extends HttpServlet {
 			}
 		});
 		if (!isValidateUsername.get()) {
-			request.setAttribute("validationUsername", "is-invalid");
-			request.setAttribute("errorUsernameLogin", "Username non trovato!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			req.setAttribute("validationUsername", "is-invalid");
+			req.setAttribute("errorUsernameLogin", "Username non trovato!");
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		} else if (!isValidatePassword.get()) {
-			request.setAttribute("validationPassword", "is-invalid");
-			request.setAttribute("errorPasswordLogin", "Password errata!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			req.setAttribute("validationPassword", "is-invalid");
+			req.setAttribute("errorPasswordLogin", "Password errata!");
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		} else if (isValidateUsername.get() && isValidatePassword.get()) {
-			HttpSession oldSession = request.getSession(false);
+			HttpSession oldSession = req.getSession(false);
 			if (oldSession != null) {
 				oldSession.invalidate();
 			}
-			HttpSession currentSession = request.getSession();
+			HttpSession currentSession = req.getSession();
 			currentSession.setAttribute("user", usernameTemp.get());
 			currentSession.setMaxInactiveInterval(15 * 60);
-			response.sendRedirect("home/home.jsp");
+			resp.sendRedirect("home/home.jsp");
 		}
 	}
 
