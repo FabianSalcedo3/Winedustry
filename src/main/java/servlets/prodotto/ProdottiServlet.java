@@ -24,9 +24,9 @@ public class ProdottiServlet extends HttpServlet {
 		if (isValidString(prodottoID)) {
 			Prodotto prodotto = new ProdottoJPA(Prodotto.class).findById(Integer.parseInt(req.getParameter("prodottoID")));
 			req.setAttribute("prodotto", prodotto);
-			req.getRequestDispatcher("prodotti.jsp").forward(req, resp);
+			req.getRequestDispatcher("prodotto/prodotto.jsp").forward(req, resp);
 		} else {
-			resp.sendRedirect("index.jsp");
+			resp.sendRedirect("home.jsp");
 		}
 	}
 

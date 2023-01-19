@@ -6,12 +6,14 @@ import java.util.List;
 
 import entities.Regione;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.regione.RegioneJPA;
 import utils.InterfaceStringValidation;
 
+@WebServlet("/RegioniServlet")
 public class RegioniServlet extends HttpServlet {
 
 	@Serial
