@@ -54,7 +54,8 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<!-- is-hint -->
-							<span class="hint-radius"></span> <span class="hint-dot"></span>
+							<a href="../RegioniServlet?regioneID=1"><span class="hint-radius"></span>
+							<span class="hint-dot"></span></a>
 							<div class="hint-content do--split-children glassmorfismo"
 								style="width: 380px;">
 								<p style="margin-left: 15px; margin-right: 15px;">Scopri
