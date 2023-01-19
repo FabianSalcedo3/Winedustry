@@ -70,7 +70,7 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin();
-			em.merge(entity);
+			em.persist(em.merge(entity));
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
