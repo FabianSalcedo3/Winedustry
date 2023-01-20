@@ -30,11 +30,8 @@ public class CarrelloItem {
     @JoinColumn(name = "carrello_id")
     private Carrello carrello;
 
-    public CarrelloItem(){
-        super();
-    }
-
     public CarrelloItem(int quantita, Prodotto prodotto, Carrello carrello) {
+        super();
         this.quantita = quantita;
         this.prodotto = prodotto;
         this.carrello = carrello;
