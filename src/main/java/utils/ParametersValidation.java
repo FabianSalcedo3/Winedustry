@@ -2,9 +2,6 @@ package utils;
 
 import entities.Utente;
 
-import java.util.List;
-import java.util.Objects;
-
 public class ParametersValidation {
 
     public boolean isInteger(String value) {
@@ -43,15 +40,6 @@ public class ParametersValidation {
 
     public boolean isValidDouble(String value) {
         return (value != null && !value.isEmpty() && isDouble(value));
-    }
-
-    public String[] areValidParameters(String[] parameters) {
-        for (int i = 0; i < parameters.length; i++) {
-            if (!isValidString(parameters[i])) {
-                parameters[i] = null;
-            }
-        }
-        return parameters;
     }
 
 }
