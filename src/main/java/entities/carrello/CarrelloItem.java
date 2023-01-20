@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "carrello_item")
-public class CarrelloItem extends Carrello {
+public class CarrelloItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +30,14 @@ public class CarrelloItem extends Carrello {
     @JoinColumn(name = "carrello_id")
     private Carrello carrello;
 
-    public CarrelloItem(int id) {
-        super(id);
-        this.id = id;
+    public CarrelloItem(){
+        super();
+    }
+
+    public CarrelloItem(int quantita, Prodotto prodotto, Carrello carrello) {
+        this.quantita = quantita;
+        this.prodotto = prodotto;
+        this.carrello = carrello;
     }
 
     public int getId() {

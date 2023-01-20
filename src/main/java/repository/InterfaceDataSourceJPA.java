@@ -4,22 +4,22 @@ import java.util.List;
 
 public interface InterfaceDataSourceJPA<T, PK> {
 
-	T findById(PK id);
+    T findById(PK id);
 
-	List<T> findAll();
+    List<T> findAll();
 
-	void save(T entity);
+    void save(T entity);
 
-	void update(T entity);
+    void update(T entity);
 
-	void delete(T entity);
+    void delete(T entity);
 
-	void deleteById(PK id);
+    void deleteById(PK id);
 
-	T findBySomething(String query, Object value);
+    T findBySomething(String query, Object value);
 
-	List<T> findBySomethingList(String query, Object value);
+    List<T> findBySomethingList(String query, Object value);
 
-	List<T> findByMore(String query, int nPar, Object[] values);
+    List<T> findByMore(String query, int nPar, Object[] values);
 
 }

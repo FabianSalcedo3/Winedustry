@@ -12,35 +12,37 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.informazioni.InformazioniJPA;
-import utils.InterfaceStringValidation;
+import utils.ParametersValidation;
 
 @WebServlet("/InformazioniServlet")
 public class InformazioniServlet extends HttpServlet implements Servlet {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String informazioniID = req.getParameter("informazioniID");
-		if (InterfaceStringValidation.isValidString(informazioniID)) {
-			Informazioni informazioni = new InformazioniJPA(Informazioni.class).findById(Integer.parseInt(req.getParameter("informazioniID")));
-			req.setAttribute("informazioni", informazioni);
-			req.getRequestDispatcher("informazioni.jsp").forward(req, resp);
-		} else {
-			resp.sendRedirect("test.jsp");
-		}
-	}
+    private static final ParametersValidation pv = new ParametersValidation();
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Informazioni> informazioniList = new InformazioniJPA(Informazioni.class).findAll();
-		if (!informazioniList.isEmpty()) {
-			req.setAttribute("informazioniList", informazioniList);
-			req.getRequestDispatcher("informazioni.jsp").forward(req, resp);
-		} else {
-			resp.sendRedirect("index.jsp");
-		}
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String informazioniID = req.getParameter("informazioniID");
+        if (pv.isValidString(informazioniID)) {
+            Informazioni informazioni = new InformazioniJPA().findById(Integer.parseInt(req.getParameter("informazioniID")));
+            req.setAttribute("informazioni", informazioni);
+            req.getRequestDispatcher("informazioni.jsp").forward(req, resp);
+        } else {
+            resp.sendRedirect("test.jsp");
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Informazioni> informazioniList = new InformazioniJPA().findAll();
+        if (!informazioniList.isEmpty()) {
+            req.setAttribute("informazioniList", informazioniList);
+            req.getRequestDispatcher("informazioni.jsp").forward(req, resp);
+        } else {
+            resp.sendRedirect("index.jsp");
+        }
+    }
 
 }

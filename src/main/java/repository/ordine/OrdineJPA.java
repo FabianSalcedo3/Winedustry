@@ -6,8 +6,8 @@ import repository.DataSourceJPA;
 
 public class OrdineJPA extends DataSourceJPA<Ordine, Integer> implements InterfaceOrdineJPA {
 
-    public OrdineJPA(Class<Ordine> entityClass) {
-        super(entityClass);
+    public OrdineJPA() {
+        super(Ordine.class);
     }
 
 }

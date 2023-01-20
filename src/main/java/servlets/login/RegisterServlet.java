@@ -1,24 +1,27 @@
 package servlets.login;
 
 import entities.Utente;
+import entities.carrello.Carrello;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import repository.carrello.CarrelloJPA;
 import repository.utente.UtenteJPA;
-import utils.InterfaceStringValidation;
+import utils.ParametersValidation;
 
 import java.io.IOException;
+import java.io.Serial;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    private static final ParametersValidation pv = new ParametersValidation();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,13 +29,15 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String isInvalid = "is-invalid";
-        if (InterfaceStringValidation.isValidString(username)) {
-            if (InterfaceStringValidation.isValidString(password)) {
-                if (InterfaceStringValidation.isValidString(email)) {
+        if (pv.isValidString(username)) {
+            if (pv.isValidString(password)) {
+                if (pv.isValidString(email)) {
                     if (isValidUsername(username)) {
                         if (isValidEmail(email)) {
                             Utente utente = new Utente(email, username, password);
-                            new UtenteJPA(Utente.class).save(utente);
+                            Carrello carrello = new Carrello(utente);
+                            new UtenteJPA().save(utente);
+                            new CarrelloJPA().save(carrello);
                             HttpSession oldSession = req.getSession(false);
                             if (oldSession != null) {
                                 oldSession.invalidate();
@@ -69,11 +74,11 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private boolean isValidUsername(String username) {
-        return (new UtenteJPA(Utente.class).findBySomething("where username=?1", username) == null);
+        return (new UtenteJPA().findBySomething("where username=?1", username) == null);
     }
 
     private boolean isValidEmail(String email) {
-        return (new UtenteJPA(Utente.class).findBySomething("where email=?1", email) == null);
+        return (new UtenteJPA().findBySomething("where email=?1", email) == null);
     }
 
 }

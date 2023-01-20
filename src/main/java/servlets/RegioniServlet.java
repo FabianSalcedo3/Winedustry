@@ -10,18 +10,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.regione.RegioneJPA;
-import utils.InterfaceStringValidation;
+import utils.ParametersValidation;
 
 public class RegioniServlet extends HttpServlet {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
 
+	private static final ParametersValidation pv = new ParametersValidation();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String regioneID = req.getParameter("regioneID");
-		if (InterfaceStringValidation.isValidString(regioneID)) {
-			Regione regione = new RegioneJPA(Regione.class).findById(Integer.parseInt(req.getParameter("regioneID")));
+		if (pv.isValidString(regioneID)) {
+			Regione regione = new RegioneJPA().findById(Integer.parseInt(req.getParameter("regioneID")));
 			req.setAttribute("regione", regione);
 			req.getRequestDispatcher("regione.jsp").forward(req, resp);
 		} else {
@@ -31,7 +33,7 @@ public class RegioniServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Regione> regioni = new RegioneJPA(Regione.class).findAll();
+		List<Regione> regioni = new RegioneJPA().findAll();
 		if (!regioni.isEmpty()) {
 			req.setAttribute("regioni", regioni);
 			req.getRequestDispatcher("regioni.jsp").forward(req, resp);

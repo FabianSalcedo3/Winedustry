@@ -22,9 +22,8 @@ public class Carrello {
     @OneToMany(mappedBy = "carrello", fetch = FetchType.EAGER)
     private List<CarrelloItem> carrelloItems = new ArrayList<>();
 
-    public Carrello(int id) {
-        super();
-        this.id = id;
+    public Carrello(Utente utente) {
+        this.utente = utente;
     }
 
     public int getId() {
@@ -53,6 +52,6 @@ public class Carrello {
 
     @Override
     public String toString() {
-        return "Carrello{" + "id=" + id + '}';
+        return "Carrello{" + "id=" + id + ", carrelloItems=" + carrelloItems + '}';
     }
 }

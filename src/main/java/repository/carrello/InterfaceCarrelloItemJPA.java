@@ -1,7 +1,6 @@
 package repository.carrello;
 
-
-import entities.carrello.Carrello;
+import entities.carrello.CarrelloItem;
 import repository.InterfaceDataSourceJPA;
 
-public interface InterfaceCarrelloItemJPA extends InterfaceDataSourceJPA<Carrello, Integer> {}
+public interface InterfaceCarrelloItemJPA extends InterfaceDataSourceJPA<CarrelloItem, Integer> {}

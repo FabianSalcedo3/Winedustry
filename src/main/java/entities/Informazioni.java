@@ -7,44 +7,30 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "informazioni")
 public class Informazioni {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    int id;
 
     @Column(name = "nome", length = 50)
-    private String nome;
+    String nome;
 
     @Column(name = "cognome", length = 50)
-    private String cognome;
+    String cognome;
 
     @Column(name = "codice_fiscale", length = 16, unique = true)
-    private String codiceFiscale;
+    String codiceFiscale;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_nascita")
-    private LocalDate dataNascita;
+    LocalDate dataNascita;
 
     @Column(name = "telefono", length = 10)
-    private String telefono;
+    String telefono;
 
     @OneToOne
     @JoinColumn(name = "utente_id")
-    private Utente utente;
-
-    public Informazioni() {
-        super();
-    }
-
-    public Informazioni(String nome, String cognome, String codiceFiscale, LocalDate dataNascita, String telefono, Utente utente) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.codiceFiscale = codiceFiscale;
-        this.dataNascita = dataNascita;
-        this.telefono = telefono;
-        this.utente = utente;
-    }
+    Utente utente;
 
     public int getId() {
         return id;
@@ -104,6 +90,10 @@ public class Informazioni {
 
     @Override
     public String toString() {
-        return "Informazioni{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", codiceFiscale='" + codiceFiscale + '\'' + ", dataNascita=" + dataNascita + ", telefono='" + telefono + '\'' + '}';
+        return "Informazioni{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", codiceFiscale='" + codiceFiscale + '\'' + ", dataNascita=" + dataNascita + ", telefono='" + telefono + '\'' + ", utente=" + utente + '}';
     }
 }
+
+
+
+

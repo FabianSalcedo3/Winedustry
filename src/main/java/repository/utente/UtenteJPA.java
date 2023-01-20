@@ -6,8 +6,7 @@ import repository.DataSourceJPA;
 
 public class UtenteJPA extends DataSourceJPA<Utente, Integer> implements InterfaceUtenteJPA {
 
-    public UtenteJPA(Class<Utente> entityClass) {
-        super(entityClass);
+    public UtenteJPA() {
+        super(Utente.class);
     }
-
 }
