@@ -30,7 +30,7 @@ public class Utente {
     @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
     private Informazioni informazioni;
 
-    @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
     private Pagamento pagamento;
 
     @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
