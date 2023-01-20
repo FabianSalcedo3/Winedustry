@@ -6,12 +6,14 @@ import java.util.List;
 
 import entities.Utente;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.utente.UtenteJPA;
 import utils.ParametersValidation;
 
+@WebServlet("/UtentiServlet")
 public class UtentiServlet extends HttpServlet {
 
     @Serial
