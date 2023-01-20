@@ -3,7 +3,6 @@ package servlets.informazioni;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import entities.Informazioni;
 import entities.Utente;
@@ -35,10 +34,10 @@ public class InserisciInformazioniServlet extends HttpServlet {
             Utente utente = new UtenteJPA().findById(Integer.parseInt(utenteID));
             Informazioni informazioni = new Informazioni();
             if (pv.isValidString(utenteNome)) {informazioni.setNome(utenteNome);}
-            if (pv.isValidString(utenteCognome)) {informazioni.setNome(utenteCognome);}
-            if (pv.isValidString(utenteCodiceFiscale)) {informazioni.setNome(utenteCodiceFiscale);}
-            if (pv.isValidString(utenteDataNascita)) {informazioni.setNome(utenteDataNascita);}
-            if (pv.isValidString(utenteTelefono)) {informazioni.setNome(utenteTelefono);}
+            if (pv.isValidString(utenteCognome)) {informazioni.setCognome(utenteCognome);}
+            if (pv.isValidString(utenteCodiceFiscale)) {informazioni.setCodiceFiscale(utenteCodiceFiscale);}
+            if (pv.isValidString(utenteDataNascita)) {informazioni.setDataNascita(LocalDate.parse(utenteDataNascita));}
+            if (pv.isValidString(utenteTelefono)) {informazioni.setTelefono(utenteTelefono);}
             if (pv.existInformazioni(utente)) {
                 new InformazioniJPA().update(informazioni);
             } else {

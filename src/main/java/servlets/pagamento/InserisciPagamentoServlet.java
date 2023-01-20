@@ -1,13 +1,11 @@
 package servlets.pagamento;
 
-import entities.Informazioni;
 import entities.Pagamento;
 import entities.Utente;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import repository.informazioni.InformazioniJPA;
 import repository.pagamento.PagamentoJPA;
 import repository.utente.UtenteJPA;
 import utils.ParametersValidation;
