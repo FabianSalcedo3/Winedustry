@@ -3,6 +3,7 @@ package servlets.informazioni;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import entities.Informazioni;
 import entities.Utente;
@@ -12,13 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.informazioni.InformazioniJPA;
 import repository.utente.UtenteJPA;
-import utils.InterfaceStringValidation;
+import utils.ParametersValidation;
 
 @WebServlet("/InserisciInformazioniServlet")
 public class InserisciInformazioniServlet extends HttpServlet {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    private static final ParametersValidation pv = new ParametersValidation();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -28,32 +31,21 @@ public class InserisciInformazioniServlet extends HttpServlet {
         String utenteCodiceFiscale = req.getParameter("utenteCodiceFiscale");
         String utenteDataNascita = req.getParameter("utenteDataNascita");
         String utenteTelefono = req.getParameter("utenteTelefono");
-        if (InterfaceStringValidation.isValidUser(utenteID)) {
-            Utente utente = new UtenteJPA(Utente.class).findById(Integer.parseInt(utenteID));
-            if (InterfaceStringValidation.existInformazioni(utente)) {
-                Informazioni informazioni = utente.getInformazioni();
-                if (InterfaceStringValidation.isValidString(utenteNome)) {
-                    informazioni.setNome(utenteNome);
-                }
-                if (InterfaceStringValidation.isValidString(utenteCognome)) {
-                    informazioni.setCognome(utenteCognome);
-                }
-                if (InterfaceStringValidation.isValidString(utenteCodiceFiscale)) {
-                    informazioni.setCodiceFiscale(utenteCodiceFiscale);
-                }
-                if (InterfaceStringValidation.isValidString(utenteDataNascita)) {
-                    informazioni.setDataNascita(LocalDate.parse(utenteDataNascita));
-                }
-                if (InterfaceStringValidation.isValidString(utenteCodiceFiscale)) {
-                    informazioni.setTelefono(utenteTelefono);
-                }
-                new InformazioniJPA(Informazioni.class).update(informazioni);
+        if (pv.isValidUser(utenteID)) {
+            Utente utente = new UtenteJPA().findById(Integer.parseInt(utenteID));
+            Informazioni informazioni = new Informazioni();
+            if (pv.isValidString(utenteNome)) {informazioni.setNome(utenteNome);}
+            if (pv.isValidString(utenteCognome)) {informazioni.setNome(utenteCognome);}
+            if (pv.isValidString(utenteCodiceFiscale)) {informazioni.setNome(utenteCodiceFiscale);}
+            if (pv.isValidString(utenteDataNascita)) {informazioni.setNome(utenteDataNascita);}
+            if (pv.isValidString(utenteTelefono)) {informazioni.setNome(utenteTelefono);}
+            if (pv.existInformazioni(utente)) {
+                new InformazioniJPA().update(informazioni);
             } else {
-                Informazioni informazioni = new Informazioni(utenteNome, utenteCognome, utenteCodiceFiscale, LocalDate.parse(utenteDataNascita), utenteTelefono, utente);
-                new InformazioniJPA(Informazioni.class).save(informazioni);
+                new InformazioniJPA().save(informazioni);
             }
         }
         resp.sendRedirect("utente.jsp");
     }
-
 }
+

@@ -10,44 +10,48 @@ import jakarta.persistence.*;
 @Table(name = "carrello")
 public class Carrello {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@OneToOne
-	@JoinColumn(name = "utente_id")
-	private Utente utente;
+    @OneToOne
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
-	@OneToMany(mappedBy = "carrello", fetch = FetchType.EAGER)
-	private List<CarrelloItem> carrelloItems = new ArrayList<>();
+    @OneToMany(mappedBy = "carrello", fetch = FetchType.EAGER)
+    private List<CarrelloItem> carrelloItems = new ArrayList<>();
 
-	public int getId() {
-		return id;
-	}
+    public Carrello(Utente utente) {
+        this.utente = utente;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public Utente getUtente() {
-		return utente;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
+    public Utente getUtente() {
+        return utente;
+    }
 
-	public List<CarrelloItem> getCarrelloItems() {
-		return carrelloItems;
-	}
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
 
-	public void setCarrelloItems(List<CarrelloItem> carrelloItems) {
-		this.carrelloItems = carrelloItems;
-	}
+    public List<CarrelloItem> getCarrelloItems() {
+        return carrelloItems;
+    }
 
-	@Override
-	public String toString() {
-		return "Carrello{" + "id=" + id + '}';
-	}
+    public void setCarrelloItems(List<CarrelloItem> carrelloItems) {
+        this.carrelloItems = carrelloItems;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrello{" + "id=" + id + ", carrelloItems=" + carrelloItems + '}';
+    }
 }

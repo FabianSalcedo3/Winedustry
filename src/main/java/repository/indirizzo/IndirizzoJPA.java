@@ -6,7 +6,7 @@ import repository.DataSourceJPA;
 
 public class IndirizzoJPA extends DataSourceJPA<Indirizzo, Integer> implements InterfaceIndirizzoJPA {
 
-    public IndirizzoJPA(Class<Indirizzo> entityClass) {
-        super(entityClass);
+    public IndirizzoJPA() {
+        super(Indirizzo.class);
     }
 }

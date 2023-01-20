@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.prodotto.ProdottoJPA;
-import utils.InterfaceStringValidation;
+import utils.ParametersValidation;
 
 @WebServlet("/RicercaProdottiServlet")
 public class RicercaProdottiServlet extends HttpServlet {
@@ -21,44 +21,46 @@ public class RicercaProdottiServlet extends HttpServlet {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
+	private static final ParametersValidation pv = new ParametersValidation();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String prodottoAnnataAsString = req.getParameter("prodottoAnnata");
-		String prodottoFormatoAsString = req.getParameter("prodottoFormato");
-		String prodottoGradazioneAsString = req.getParameter("prodottoGradazione");
-		String prodottoCategoriaAsString = req.getParameter("prodottoCategoria");
-		String prodottoVitignoAsString = req.getParameter("prodottoVitigno");
+		String prodottoAnnata = req.getParameter("prodottoAnnata");
+		String prodottoFormato = req.getParameter("prodottoFormato");
+		String prodottoGradazione = req.getParameter("prodottoGradazione");
+		String prodottoCategoria = req.getParameter("prodottoCategoria");
+		String prodottoVitigno = req.getParameter("prodottoVitigno");
 
-		if (InterfaceStringValidation.isValidInteger(prodottoVitignoAsString)) {
-			List<Prodotto> prodottiByAnnata = new ProdottoJPA(Prodotto.class).findBySomethingList("where annata = ?1", prodottoAnnataAsString);
+		if (pv.isValidInteger(prodottoVitigno)) {
+			List<Prodotto> prodottiByAnnata = new ProdottoJPA().findBySomethingList("where annata = ?1", prodottoAnnata);
 			if (!prodottiByAnnata.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByAnnata);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (InterfaceStringValidation.isValidDouble(prodottoFormatoAsString)) {
-			List<Prodotto> prodottiByFormato = new ProdottoJPA(Prodotto.class).findBySomethingList("where formato = ?1", prodottoFormatoAsString);
+		} else if (pv.isValidDouble(prodottoFormato)) {
+			List<Prodotto> prodottiByFormato = new ProdottoJPA().findBySomethingList("where formato = ?1", prodottoFormato);
 			if (!prodottiByFormato.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByFormato);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (InterfaceStringValidation.isValidInteger(prodottoGradazioneAsString)) {
-			List<Prodotto> prodottiByGradazione = new ProdottoJPA(Prodotto.class).findBySomethingList("where gradazione = ?1", prodottoGradazioneAsString);
+		} else if (pv.isValidInteger(prodottoGradazione)) {
+			List<Prodotto> prodottiByGradazione = new ProdottoJPA().findBySomethingList("where gradazione = ?1", prodottoGradazione);
 			if (!prodottiByGradazione.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByGradazione);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (InterfaceStringValidation.isValidString(prodottoCategoriaAsString)) {
-			List<Prodotto> prodottiByCategoria = new ProdottoJPA(Prodotto.class).findBySomethingList("where categoria = ?1", prodottoCategoriaAsString);
+		} else if (pv.isValidString(prodottoCategoria)) {
+			List<Prodotto> prodottiByCategoria = new ProdottoJPA().findBySomethingList("where categoria = ?1", prodottoCategoria);
 			if (!prodottiByCategoria.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByCategoria);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
 				return;
 			}
-		} else if (InterfaceStringValidation.isValidString(prodottoVitignoAsString)) {
-			List<Prodotto> prodottiByVitigno = new ProdottoJPA(Prodotto.class).findBySomethingList("where vitigno = ?1", prodottoVitignoAsString);
+		} else if (pv.isValidString(prodottoVitigno)) {
+			List<Prodotto> prodottiByVitigno = new ProdottoJPA().findBySomethingList("where vitigno = ?1", prodottoVitigno);
 			if (!prodottiByVitigno.isEmpty()) {
 				req.setAttribute("prodotti", prodottiByVitigno);
 				req.getRequestDispatcher("regione.jsp").forward(req, resp);
@@ -72,26 +74,26 @@ public class RicercaProdottiServlet extends HttpServlet {
 		String value = req.getParameter("ricercaProdotto");
 		if (value != null && !value.isEmpty()) {
 			HashMap<Integer, Prodotto> prodottiTemp = new HashMap<>();
-			if (InterfaceStringValidation.isInteger(value)) {
-				List<Prodotto> prodottiByAnnata = new ProdottoJPA(Prodotto.class).findBySomethingList("where annata = ?1", value);
+			if (pv.isInteger(value)) {
+				List<Prodotto> prodottiByAnnata = new ProdottoJPA().findBySomethingList("where annata = ?1", value);
 				if (!prodottiByAnnata.isEmpty()) {
 					prodottiByAnnata.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
 				}
-				List<Prodotto> prodottiByGradazione = new ProdottoJPA(Prodotto.class).findBySomethingList("where gradazione = ?1", value);
+				List<Prodotto> prodottiByGradazione = new ProdottoJPA().findBySomethingList("where gradazione = ?1", value);
 				if (!prodottiByGradazione.isEmpty()) {
 					prodottiByGradazione.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
 				}
-			} else if (InterfaceStringValidation.isDouble(value)) {
-				List<Prodotto> prodottiByFormato = new ProdottoJPA(Prodotto.class).findBySomethingList("where formato = ?1", value);
+			} else if (pv.isDouble(value)) {
+				List<Prodotto> prodottiByFormato = new ProdottoJPA().findBySomethingList("where formato = ?1", value);
 				if (!prodottiByFormato.isEmpty()) {
 					prodottiByFormato.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
 				}
 			} else {
-				List<Prodotto> prodottiByCategoria = new ProdottoJPA(Prodotto.class).findBySomethingList("where categoria like ?1", value + "%");
+				List<Prodotto> prodottiByCategoria = new ProdottoJPA().findBySomethingList("where categoria like ?1", value + "%");
 				if (!prodottiByCategoria.isEmpty()) {
 					prodottiByCategoria.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
 				}
-				List<Prodotto> prodottiByVitigno = new ProdottoJPA(Prodotto.class).findBySomethingList("where vitigno like ?1", value + "%");
+				List<Prodotto> prodottiByVitigno = new ProdottoJPA().findBySomethingList("where vitigno like ?1", value + "%");
 				if (!prodottiByVitigno.isEmpty()) {
 					prodottiByVitigno.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
 				}
