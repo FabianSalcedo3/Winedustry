@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
 
-@WebServlet("/RegioniServlet")
+@WebServlet("/IndirizziServlet")
 public class IndirizziServlet extends HttpServlet {
 
     @Serial

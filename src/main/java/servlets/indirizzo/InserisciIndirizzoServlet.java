@@ -13,7 +13,7 @@ import utils.ParametersValidation;
 import java.io.IOException;
 import java.io.Serial;
 
-@WebServlet("/InserisciInformazioniServlet")
+@WebServlet("/InserisciIndirizzoServlet")
 public class InserisciIndirizzoServlet extends HttpServlet {
 
     @Serial
