@@ -30,14 +30,14 @@ public class Utente {
     @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
     private Informazioni informazioni;
 
+    @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
+    private Pagamento pagamento;
+
     @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
     private Carrello carrello;
 
     @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
     private List<Ordine> ordini = new ArrayList<>();
-
-    @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
-    private List<Pagamento> pagamenti = new ArrayList<>();
 
     public Utente() {
         super();
@@ -113,12 +113,12 @@ public class Utente {
         this.ordini = ordini;
     }
 
-    public List<Pagamento> getPagamenti() {
-        return pagamenti;
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
-    public void setPagamenti(List<Pagamento> pagamenti) {
-        this.pagamenti = pagamenti;
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
     @Override

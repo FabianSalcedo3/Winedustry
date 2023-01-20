@@ -34,6 +34,14 @@ public class ParametersValidation {
         return (utente != null && utente.getInformazioni() != null);
     }
 
+    public boolean existIndirizzo(Utente utente) {
+        return (utente != null && utente.getIndirizzo() != null);
+    }
+
+    public boolean existPagamento(Utente utente) {
+        return (utente != null && utente.getPagamento() != null);
+    }
+
     public boolean isValidInteger(String value) {
         return (value != null && !value.isEmpty() && isInteger(value));
     }

@@ -1,8 +1,8 @@
 package entities;
 
-import java.util.Date;
-
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "pagamento")
@@ -13,20 +13,20 @@ public class Pagamento {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "carta", length = 19, nullable = false)
+    @Column(name = "carta", length = 19)
     private String carta;
 
-    @Column(name = "circuito", length = 20, nullable = false)
+    @Column(name = "circuito", length = 20)
     private String circuito;
 
-    @Column(name = "proprietario", length = 50, nullable = false)
+    @Column(name = "proprietario", length = 50)
     private String proprietario;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_scadenza", nullable = false)
-    private Date dataScadenza;
+    @Column(name = "data_scadenza")
+    private LocalDate dataScadenza;
 
-    @Column(name = "cvv", nullable = false)
+    @Column(name = "cvv")
     private int cvv;
 
     @OneToOne
@@ -65,11 +65,11 @@ public class Pagamento {
         this.proprietario = proprietario;
     }
 
-    public Date getDataScadenza() {
+    public LocalDate getDataScadenza() {
         return dataScadenza;
     }
 
-    public void setDataScadenza(Date dataScadenza) {
+    public void setDataScadenza(LocalDate dataScadenza) {
         this.dataScadenza = dataScadenza;
     }
 
