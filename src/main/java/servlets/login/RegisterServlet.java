@@ -11,10 +11,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import repository.utente.UtenteJPA;
-import utils.InterfaceStringValidation;
+import utils.ParametersValidation;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
+	
+	private static final ParametersValidation pv = new ParametersValidation();
+
 	
 	@Serial
     private static final long serialVersionUID = 1L;
@@ -30,13 +33,13 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String isInvalid = "is-invalid";
-        if (InterfaceStringValidation.isValidString(username)) {
-            if (InterfaceStringValidation.isValidString(password)) {
-                if (InterfaceStringValidation.isValidString(email)) {
+        if (pv.isValidString(username)) {
+            if (pv.isValidString(password)) {
+                if (pv.isValidString(email)) {
                     if (isValidUsername(username)) {
                         if (isValidEmail(email)) {
                             Utente utente = new Utente(email, username, password);
-                            new UtenteJPA(Utente.class).save(utente);
+                            new UtenteJPA().save(utente);
                             HttpSession oldSession = req.getSession(false);
                             if (oldSession != null) {
                                 oldSession.invalidate();
@@ -73,11 +76,11 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private boolean isValidUsername(String username) {
-        return (new UtenteJPA(Utente.class).findBySomething("where username=?1", username) == null);
+        return (new UtenteJPA().findBySomething("where username=?1", username) == null);
     }
 
     private boolean isValidEmail(String email) {
-        return (new UtenteJPA(Utente.class).findBySomething("where email=?1", email) == null);
+        return (new UtenteJPA().findBySomething("where email=?1", email) == null);
     }
 
 }

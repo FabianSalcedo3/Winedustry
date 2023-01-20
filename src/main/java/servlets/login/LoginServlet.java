@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		AtomicReference<String> usernameTemp = new AtomicReference<>();
-		List<Utente> utenti = new UtenteJPA(Utente.class).findAll();
+		List<Utente> utenti = new UtenteJPA().findAll();
 		AtomicBoolean isValidateUsername = new AtomicBoolean(false);
 		AtomicBoolean isValidatePassword = new AtomicBoolean(false);
 		if (username.isEmpty() && password.isEmpty()) {
