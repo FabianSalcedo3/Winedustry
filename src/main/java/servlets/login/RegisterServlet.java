@@ -1,15 +1,15 @@
 package servlets.login;
 
 import entities.Utente;
-import entities.carrello.Carrello;
+import entities.ordine.Carrello;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import repository.carrello.CarrelloJPA;
-import repository.utente.UtenteJPA;
+import repository.datasource.CarrelloJPA;
+import repository.datasource.UtenteJPA;
 
 import java.io.IOException;
 import java.io.Serial;

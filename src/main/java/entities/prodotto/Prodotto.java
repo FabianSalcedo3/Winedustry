@@ -15,14 +15,11 @@ public class Prodotto {
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
 
-    @Column(name = "annata")
-    private int annata;
+    @Column(name = "produttore", length = 50)
+    private String produttore;
 
     @Column(name = "formato")
     private double formato;
-
-    @Column(name = "gradazione")
-    private int gradazione;
 
     @Column(name = "prezzo", nullable = false)
     private double prezzo;
@@ -38,9 +35,6 @@ public class Prodotto {
 
     @Column(name = "descrizione", length = 5000)
     private String descrizione;
-
-    @Column(name = "produttore", length = 50)
-    private String produttore;
 
     public int getId() {
         return id;
@@ -58,28 +52,12 @@ public class Prodotto {
         this.nome = nome;
     }
 
-    public int getAnnata() {
-        return annata;
-    }
-
-    public void setAnnata(int annata) {
-        this.annata = annata;
-    }
-
     public double getFormato() {
         return formato;
     }
 
     public void setFormato(double formato) {
         this.formato = formato;
-    }
-
-    public int getGradazione() {
-        return gradazione;
-    }
-
-    public void setGradazione(int gradazione) {
-        this.gradazione = gradazione;
     }
 
     public double getPrezzo() {
@@ -132,6 +110,6 @@ public class Prodotto {
 
     @Override
     public String toString() {
-        return "Prodotto{" + "id=" + id + ", nome='" + nome + '\'' + ", annata=" + annata + ", formato=" + formato + ", gradazione=" + gradazione + ", prezzo=" + prezzo + ", valutazione=" + valutazione + ", nazione='" + nazione + '\'' + ", immagine='" + immagine + '\'' + ", descrizione='" + descrizione + '\'' + ", produttore='" + produttore + '\'' + '}';
+        return "Prodotto{" + "id=" + id + ", nome='" + nome + '\'' + ", formato=" + formato + ", prezzo=" + prezzo + ", valutazione=" + valutazione + ", nazione='" + nazione + '\'' + ", immagine='" + immagine + '\'' + ", descrizione='" + descrizione + '\'' + ", produttore='" + produttore + '\'' + '}';
     }
 }

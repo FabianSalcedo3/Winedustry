@@ -1,6 +1,6 @@
 package entities;
 
-import entities.prodotto.Vino;
+import entities.prodotto.alcolico.Vino;
 import jakarta.persistence.*;
 
 import java.util.List;

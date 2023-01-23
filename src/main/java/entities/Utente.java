@@ -1,6 +1,8 @@
 package entities;
 
-import entities.carrello.Carrello;
+import entities.ordine.Carrello;
+import entities.ordine.Ordine;
+import entities.ordine.Pagamento;
 import jakarta.persistence.*;
 
 import java.util.List;

@@ -1,17 +1,17 @@
 package servlets.carrello;
 
 import entities.prodotto.Prodotto;
-import entities.carrello.Carrello;
-import entities.carrello.CarrelloItem;
+import entities.ordine.Carrello;
+import entities.ordine.CarrelloItem;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import repository.carrello.CarrelloItemJPA;
-import repository.prodotto.ProdottoJPA;
-import repository.utente.UtenteJPA;
+import repository.datasource.CarrelloItemJPA;
+import repository.datasource.prodotto.ProdottoJPA;
+import repository.datasource.UtenteJPA;
 
 import java.io.IOException;
 import java.io.Serial;

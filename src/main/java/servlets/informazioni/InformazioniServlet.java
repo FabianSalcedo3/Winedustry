@@ -7,8 +7,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import repository.informazioni.InformazioniJPA;
-import repository.utente.UtenteJPA;
+import repository.datasource.InformazioniJPA;
+import repository.datasource.UtenteJPA;
 
 import java.io.IOException;
 import java.io.Serial;

@@ -1,12 +1,12 @@
 package servlets.ordine;
 
-import entities.Ordine;
+import entities.ordine.Ordine;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import repository.ordine.OrdineJPA;
+import repository.datasource.OrdineJPA;
 
 import java.io.IOException;
 import java.io.Serial;
