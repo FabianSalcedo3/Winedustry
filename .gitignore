@@ -1,2 +1,3 @@
 # Default ignored files
 /.idea/
+/src/main/resources/META-INF/persistence.xml
