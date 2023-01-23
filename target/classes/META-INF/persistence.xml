@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit transaction-type="RESOURCE_LOCAL" name="persistence">
+        <!-- Persistence provider -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!-- Entity classes -->
+        <class>entities.carrello.Carrello</class>
+        <class>entities.carrello.CarrelloItem</class>
+        <class>entities.Indirizzo</class>
+        <class>entities.Informazioni</class>
+        <class>entities.Ordine</class>
+        <class>entities.Pagamento</class>
+        <class>entities.Regione</class>
+        <class>entities.Utente</class>
+        <class>entities.prodotto.Prodotto</class>
+        <class>entities.prodotto.Vino</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/winedustry"/>
+            <property name="jakarta.persistence.jdbc.user" value="profilatore"/>
+            <property name="jakarta.persistence.jdbc.password" value="JAITA72"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,7 +1,6 @@
 package repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 
@@ -11,11 +10,11 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
 
     private final Class<T> entityClass;
 
+    private final EntityManager em = new EntityManagerJPA().getEntityManager("persistence");
+
     public DataSourceJPA(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
-
-    private final EntityManager em = new EntityManagerJPA().getEntityManager("persistence");
 
     @Override
     public T findById(PK id) {

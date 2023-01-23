@@ -1,6 +1,5 @@
 package entities.prodotto.alcolico;
 
-import entities.prodotto.Prodotto;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -46,4 +45,5 @@ public class Birra extends Alcolico {
     public String toString() {
         return "Birra{" + "fermentazione='" + fermentazione + '\'' + ", gusto='" + gusto + '\'' + ", caratteristiche='" + caratteristiche + '\'' + "} " + super.toString();
     }
+
 }
