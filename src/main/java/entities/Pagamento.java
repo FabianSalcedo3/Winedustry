@@ -13,25 +13,38 @@ public class Pagamento {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "carta", length = 19)
+    @Column(name = "carta", length = 19, nullable = false)
     private String carta;
 
-    @Column(name = "circuito", length = 20)
+    @Column(name = "circuito", length = 20, nullable = false)
     private String circuito;
 
-    @Column(name = "proprietario", length = 50)
+    @Column(name = "proprietario", length = 50, nullable = false)
     private String proprietario;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_scadenza")
+    @Column(name = "data_scadenza", nullable = false)
     private LocalDate dataScadenza;
 
-    @Column(name = "cvv")
+    @Column(name = "cvv", nullable = false)
     private int cvv;
 
-    @OneToOne
-    @JoinColumn(name = "utente_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "utente_id", nullable = false)
     private Utente utente;
+
+    public Pagamento() {
+        super();
+    }
+
+    public Pagamento(String carta, String circuito, String proprietario, LocalDate dataScadenza, int cvv, Utente utente) {
+        this.carta = carta;
+        this.circuito = circuito;
+        this.proprietario = proprietario;
+        this.dataScadenza = dataScadenza;
+        this.cvv = cvv;
+        this.utente = utente;
+    }
 
     public int getId() {
         return id;

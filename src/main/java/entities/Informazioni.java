@@ -1,96 +1,110 @@
 package entities;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
+import org.hibernate.annotations.Immutable;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "informazioni")
 public class Informazioni {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	int id;
 
-	@Column(name = "nome", length = 50)
-	String nome;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    int id;
 
-	@Column(name = "cognome", length = 50)
-	String cognome;
+    @Column(name = "nome", length = 50)
+    private String nome;
 
-	@Column(name = "codice_fiscale", length = 16, unique = true)
-	String codiceFiscale;
+    @Column(name = "cognome", length = 50)
+    private String cognome;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascita")
-	LocalDate dataNascita;
+    @Column(name = "codice_fiscale", length = 16, unique = true)
+    private String codiceFiscale;
 
-	@Column(name = "telefono", length = 10)
-	String telefono;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_nascita")
+    private LocalDate dataNascita;
 
-	@OneToOne
-	@JoinColumn(name = "utente_id")
-	Utente utente;
+    @Column(name = "telefono", length = 10)
+    private String telefono;
 
-	public int getId() {
-		return id;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Informazioni() {
+        super();
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Informazioni(String nome, String cognome, String codiceFiscale, LocalDate dataNascita, String telefono, Utente utente) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.codiceFiscale = codiceFiscale;
+        this.dataNascita = dataNascita;
+        this.telefono = telefono;
+        this.utente = utente;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getCognome() {
-		return cognome;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getCodiceFiscale() {
-		return codiceFiscale;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setCodiceFiscale(String codiceFiscale) {
-		this.codiceFiscale = codiceFiscale;
-	}
+    public String getCognome() {
+        return cognome;
+    }
 
-	public LocalDate getDataNascita() {
-		return dataNascita;
-	}
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
 
-	public void setDataNascita(LocalDate dataNascita) {
-		this.dataNascita = dataNascita;
-	}
+    public String getCodiceFiscale() {
+        return codiceFiscale;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public void setCodiceFiscale(String codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public LocalDate getDataNascita() {
+        return dataNascita;
+    }
 
-	public Utente getUtente() {
-		return utente;
-	}
+    public void setDataNascita(LocalDate dataNascita) {
+        this.dataNascita = dataNascita;
+    }
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	@Override
-	public String toString() {
-		return "Informazioni [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", codiceFiscale=" + codiceFiscale + ", dataNascita=" + dataNascita
-				+ ", telefono=" + telefono + "]";
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+    @Override
+    public String toString() {
+        return "Informazioni{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", codiceFiscale='" + codiceFiscale + '\'' + ", dataNascita=" + dataNascita + ", telefono='" + telefono + '\'' + '}';
+    }
 }

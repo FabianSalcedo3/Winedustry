@@ -3,7 +3,6 @@ package entities;
 import entities.carrello.Carrello;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,20 +23,20 @@ public class Utente {
     @Column(name = "password", length = 20, nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
-    private Indirizzo indirizzo;
+    @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    private List<Informazioni> informazioni;
 
-    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
-    private Informazioni informazioni;
+    @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    private List<Indirizzo> indirizzi;
 
-    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
-    private Pagamento pagamento;
+    @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    private List<Pagamento> pagamenti;
 
-    @OneToOne(mappedBy = "utente", fetch = FetchType.EAGER)
-    private Carrello carrello;
+    @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    private List<Ordine> ordini;
 
-    @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
-    private List<Ordine> ordini = new ArrayList<>();
+    @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    private List<Carrello> carrello;
 
     public Utente() {
         super();
@@ -81,28 +80,28 @@ public class Utente {
         this.password = password;
     }
 
-    public Indirizzo getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(Indirizzo indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
-    public Informazioni getInformazioni() {
+    public List<Informazioni> getInformazioni() {
         return informazioni;
     }
 
-    public void setInformazioni(Informazioni informazioni) {
+    public void setInformazioni(List<Informazioni> informazioni) {
         this.informazioni = informazioni;
     }
 
-    public Carrello getCarrello() {
-        return carrello;
+    public List<Indirizzo> getIndirizzi() {
+        return indirizzi;
     }
 
-    public void setCarrello(Carrello carrello) {
-        this.carrello = carrello;
+    public void setIndirizzi(List<Indirizzo> indirizzi) {
+        this.indirizzi = indirizzi;
+    }
+
+    public List<Pagamento> getPagamenti() {
+        return pagamenti;
+    }
+
+    public void setPagamenti(List<Pagamento> pagamenti) {
+        this.pagamenti = pagamenti;
     }
 
     public List<Ordine> getOrdini() {
@@ -113,12 +112,12 @@ public class Utente {
         this.ordini = ordini;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
+    public List<Carrello> getCarrello() {
+        return carrello;
     }
 
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
+    public void setCarrello(List<Carrello> carrello) {
+        this.carrello = carrello;
     }
 
     @Override
@@ -126,3 +125,4 @@ public class Utente {
         return "Utente{" + "id=" + id + ", email='" + email + '\'' + ", username='" + username + '\'' + ", password='" + password + '\'' + '}';
     }
 }
+

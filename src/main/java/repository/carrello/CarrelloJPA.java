@@ -3,9 +3,8 @@ package repository.carrello;
 
 import entities.carrello.Carrello;
 import repository.DataSourceJPA;
-import repository.InterfaceDataSourceJPA;
 
-public class CarrelloJPA extends DataSourceJPA<Carrello, Integer> implements InterfaceDataSourceJPA<Carrello, Integer> {
+public class CarrelloJPA extends DataSourceJPA<Carrello, String> implements InterfaceCarrelloJPA{
 
     public CarrelloJPA() {
         super(Carrello.class);

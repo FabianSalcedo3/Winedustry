@@ -1,10 +1,11 @@
 package entities.carrello;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import entities.Regione;
 import entities.Utente;
+import entities.carrello.CarrelloItem;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "carrello")
@@ -15,12 +16,16 @@ public class Carrello {
     @Column(name = "id")
     private int id;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utente_id")
     private Utente utente;
 
-    @OneToMany(mappedBy = "carrello", fetch = FetchType.EAGER)
-    private List<CarrelloItem> carrelloItems = new ArrayList<>();
+    @OneToMany(mappedBy = "carrello", fetch = FetchType.LAZY)
+    private List<CarrelloItem> carrelloItems;
+
+    public Carrello() {
+        super();
+    }
 
     public Carrello(Utente utente) {
         this.utente = utente;
@@ -52,6 +57,7 @@ public class Carrello {
 
     @Override
     public String toString() {
-        return "Carrello{" + "id=" + id + ", carrelloItems=" + carrelloItems + '}';
+        return "Carrello{" + "id=" + id + '}';
     }
+
 }

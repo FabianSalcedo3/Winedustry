@@ -8,10 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.indirizzo.IndirizzoJPA;
 import repository.utente.UtenteJPA;
-import utils.ParametersValidation;
 
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/InserisciIndirizzoServlet")
 public class InserisciIndirizzoServlet extends HttpServlet {
@@ -19,31 +19,30 @@ public class InserisciIndirizzoServlet extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final ParametersValidation pv = new ParametersValidation();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String utenteID = req.getParameter("utenteID");
-        String utenteVia = req.getParameter("utenteVia");
-        String utenteCivico = req.getParameter("utenteCivico");
-        String utenteCap = req.getParameter("utenteCap");
-        String utenteCitta = req.getParameter("utenteCitta");
-        String utenteProvincia = req.getParameter("utenteProvincia");
-        if (pv.isValidUser(utenteID)) {
-            Utente utente = new UtenteJPA().findById(Integer.parseInt(utenteID));
-            Indirizzo indirizzo = new Indirizzo();
-            if (pv.isValidString(utenteVia)) {indirizzo.setVia(utenteVia);}
-            if (pv.isValidString(utenteCivico)) {indirizzo.setCivico(utenteCivico);}
-            if (pv.isValidInteger(utenteCap)) {indirizzo.setCap(Integer.parseInt(utenteCap));}
-            if (pv.isValidString(utenteCitta)) {indirizzo.setCitta(utenteCitta);}
-            if (pv.isValidString(utenteProvincia)) {indirizzo.setProvincia(utenteProvincia);}
-            if (pv.existIndirizzo(utente)) {
+        String via = req.getParameter("uVia");
+        String civico = req.getParameter("uCivico");
+        int cap = Integer.parseInt(req.getParameter("uCap"));
+        String citta = req.getParameter("uCitta");
+        String provincia = req.getParameter("uProvincia");
+        Utente utente = new UtenteJPA().findById(req.getParameter("uID"));
+        List<Indirizzo> indirizzi = new UtenteJPA().findById(req.getParameter("uID")).getIndirizzi();
+        for (Indirizzo indirizzo : indirizzi) {
+            if (indirizzo != null) {
+                indirizzo.setVia(via);
+                indirizzo.setCivico(civico);
+                indirizzo.setCap(cap);
+                indirizzo.setCitta(citta);
+                indirizzo.setProvincia(provincia);
                 new IndirizzoJPA().update(indirizzo);
             } else {
-                new IndirizzoJPA().save(indirizzo);
+                new IndirizzoJPA().save(new Indirizzo(via, civico, cap, citta, provincia, utente));
             }
+            resp.sendRedirect("utente.jsp");
         }
-        resp.sendRedirect("utente.jsp");
     }
 }
+
+
 

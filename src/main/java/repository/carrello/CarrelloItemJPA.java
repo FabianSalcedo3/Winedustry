@@ -2,11 +2,11 @@ package repository.carrello;
 
 import entities.carrello.CarrelloItem;
 import repository.DataSourceJPA;
-import repository.InterfaceDataSourceJPA;
 
-public class CarrelloItemJPA extends DataSourceJPA<CarrelloItem, Integer> implements InterfaceDataSourceJPA<CarrelloItem, Integer> {
+public class CarrelloItemJPA extends DataSourceJPA<CarrelloItem, String> implements InterfaceCarrelloItemJPA {
 
     public CarrelloItemJPA() {
         super(CarrelloItem.class);
     }
+
 }

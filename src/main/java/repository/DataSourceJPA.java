@@ -1,11 +1,11 @@
 package repository;
 
-import java.util.List;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, PK> {
 
@@ -15,22 +15,17 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
         this.entityClass = entityClass;
     }
 
-    private EntityManager getEntityManager() {
-        return Persistence.createEntityManagerFactory("persistence").createEntityManager();
-    }
+    private final EntityManager em = new EntityManagerJPA().getEntityManager("persistence");
 
     @Override
     public T findById(PK id) {
         T entity = null;
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             entity = em.find(entityClass, id);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
         return entity;
     }
@@ -38,64 +33,51 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
     @Override
     public List<T> findAll() {
         List<T> entities = null;
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             entities = em.createQuery("from " + entityClass.getName(), entityClass).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
         return entities;
     }
 
     @Override
     public void save(T entity) {
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
     }
 
     @Override
     public void update(T entity) {
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(em.merge(entity));
+            em.merge(entity);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
     }
 
     @Override
     public void delete(T entity) {
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             em.remove(em.merge(entity));
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
     }
 
     @Override
     public void deleteById(PK id) {
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             T entity = em.find(entityClass, id);
@@ -103,23 +85,18 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
     }
 
     @Override
     public T findBySomething(String query, Object value) {
         T entities = null;
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             entities = em.createQuery("from " + entityClass.getName() + " " + query, entityClass).setParameter(1, value).getSingleResult();
             em.getTransaction().commit();
         } catch (PersistenceException persistenceException) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
         return entities;
     }
@@ -127,15 +104,12 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
     @Override
     public List<T> findBySomethingList(String query, Object value) {
         List<T> entities = null;
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             entities = em.createQuery("from " + entityClass.getName() + " " + query, entityClass).setParameter(1, value).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
         return entities;
     }
@@ -143,7 +117,6 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
     @Override
     public List<T> findByMore(String query, int nPar, Object[] values) {
         List<T> entities = null;
-        EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             TypedQuery<T> typedQuery = em.createQuery("from " + entityClass.getName() + " " + query, entityClass);
@@ -154,8 +127,6 @@ public abstract class DataSourceJPA<T, PK> implements InterfaceDataSourceJPA<T, 
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-        } finally {
-            em.close();
         }
         return entities;
     }

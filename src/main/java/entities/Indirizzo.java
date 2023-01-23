@@ -26,9 +26,22 @@ public class Indirizzo {
     @Column(name = "provincia", length = 2)
     private String provincia;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utente_id")
     private Utente utente;
+
+    public Indirizzo() {
+        super();
+    }
+
+    public Indirizzo(String via, String civico, int cap, String citta, String provincia, Utente utente) {
+        this.via = via;
+        this.civico = civico;
+        this.cap = cap;
+        this.citta = citta;
+        this.provincia = provincia;
+        this.utente = utente;
+    }
 
     public int getId() {
         return id;

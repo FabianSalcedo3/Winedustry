@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.carrello.CarrelloJPA;
-import utils.ParametersValidation;
+import repository.utente.UtenteJPA;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -20,13 +20,10 @@ public class CarrelliServlet extends HttpServlet implements Servlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final ParametersValidation pv = new ParametersValidation();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String carrelloID = req.getParameter("carrelloID");
-        if (pv.isValidString(carrelloID)) {
-            Carrello carrello = new CarrelloJPA().findById(Integer.parseInt(req.getParameter("carrelloID")));
+        Carrello carrello = new UtenteJPA().findById(req.getParameter("uID")).getCarrello().get(0);
+        if (carrello != null) {
             req.setAttribute("carrello", carrello);
             req.getRequestDispatcher("carrello.jsp").forward(req, resp);
         } else {

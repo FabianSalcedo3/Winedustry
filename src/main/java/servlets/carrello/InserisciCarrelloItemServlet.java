@@ -1,5 +1,7 @@
 package servlets.carrello;
 
+import entities.prodotto.Prodotto;
+import entities.carrello.Carrello;
 import entities.carrello.CarrelloItem;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
@@ -10,10 +12,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import repository.carrello.CarrelloItemJPA;
 import repository.prodotto.ProdottoJPA;
 import repository.utente.UtenteJPA;
-import utils.ParametersValidation;
 
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/InserisciCarrelloItemServlet")
 public class InserisciCarrelloItemServlet extends HttpServlet implements Servlet {
@@ -21,19 +23,24 @@ public class InserisciCarrelloItemServlet extends HttpServlet implements Servlet
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final ParametersValidation pv = new ParametersValidation();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String utenteID = req.getParameter("utenteID");
-        String prodottoID = req.getParameter("prodottoID");
-        String quantita = req.getParameter("prodottoQuantita");
-        if (pv.isValidInteger(utenteID) && pv.isValidInteger(prodottoID)) {
-            new CarrelloItemJPA().save(new CarrelloItem(Integer.parseInt(quantita), new ProdottoJPA().findById(Integer.parseInt(prodottoID)),
-                    new UtenteJPA().findById(Integer.parseInt(utenteID)).getCarrello()));
+        int quantita = Integer.parseInt(req.getParameter("pQuatita"));
+        Prodotto prodotto = new ProdottoJPA().findById(req.getParameter("pID"));
+        Carrello carrello = new UtenteJPA().findById(req.getParameter("uID")).getCarrello().get(0);
+        List<CarrelloItem> carrelloItems = carrello.getCarrelloItems();
+        for (CarrelloItem carrelloItem : carrelloItems) {
+            if (carrelloItem.getProdotto().getId() == prodotto.getId()) {
+                carrelloItem.setCarrello(carrello);
+                carrelloItem.setProdotto(prodotto);
+                carrelloItem.setQuantita(quantita);
+                new CarrelloItemJPA().update(carrelloItem);
+                return;
+            }
         }
+        new CarrelloItemJPA().save(new CarrelloItem(quantita, carrello, prodotto));
         resp.sendRedirect("prodotti.jsp");
     }
-
-
 }
+
+

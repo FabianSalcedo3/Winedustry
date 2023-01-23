@@ -1,16 +1,21 @@
 package controller;
 
-import repository.utente.UtenteJPA;
+import repository.prodotto.ProdottoJPA;
+import repository.prodotto.birra.BirraJPA;
+import repository.prodotto.bollicine.BollicineJPA;
+import repository.prodotto.champagne.ChampagneJPA;
+import repository.prodotto.spirito.SpiritoJPA;
+import repository.prodotto.vino.VinoJPA;
 
 public class Init {
-
     public static void main(String[] args) {
-    	new UtenteJPA().findAll().forEach(utente ->{
-    		System.out.println(utente);
-    		System.out.println(utente.getIndirizzo());
-    		System.out.println(utente.getInformazioni());
-    		System.out.println(utente.getPagamento());
-    	});
+        new ProdottoJPA().findAll().forEach(System.out::println);
+        new VinoJPA().findAll().forEach(System.out::println);
+        new BirraJPA().findAll().forEach(System.out::println);
+        new BollicineJPA().findAll().forEach(System.out::println);
+        new ChampagneJPA().findAll().forEach(System.out::println);
+        new SpiritoJPA().findAll().forEach(System.out::println);
     }
-
 }
+
+

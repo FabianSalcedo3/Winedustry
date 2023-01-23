@@ -1,6 +1,10 @@
 package repository.prodotto;
 
-import entities.Prodotto;
+import entities.prodotto.Prodotto;
 import repository.InterfaceDataSourceJPA;
 
-public interface InterfaceProdottoJPA extends InterfaceDataSourceJPA<Prodotto, Integer> {}
+public interface InterfaceProdottoJPA extends InterfaceDataSourceJPA<Prodotto, String> {
+
+
+
+}

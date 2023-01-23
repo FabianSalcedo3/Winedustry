@@ -1,14 +1,7 @@
 package entities.carrello;
 
-import entities.Prodotto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import entities.prodotto.Prodotto;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "carrello_item")
@@ -23,18 +16,21 @@ public class CarrelloItem {
     private int quantita;
 
     @OneToOne
-    @JoinColumn(name = "prodotto_id")
-    private Prodotto prodotto;
-
-    @OneToOne
     @JoinColumn(name = "carrello_id")
     private Carrello carrello;
 
-    public CarrelloItem(int quantita, Prodotto prodotto, Carrello carrello) {
+    @OneToOne
+    @JoinColumn(name = "prodotto_id")
+    private Prodotto prodotto;
+
+    public CarrelloItem() {
         super();
+    }
+
+    public CarrelloItem(int quantita, Carrello carrello, Prodotto prodotto) {
         this.quantita = quantita;
-        this.prodotto = prodotto;
         this.carrello = carrello;
+        this.prodotto = prodotto;
     }
 
     public int getId() {
@@ -53,20 +49,20 @@ public class CarrelloItem {
         this.quantita = quantita;
     }
 
-    public Prodotto getProdotto() {
-        return prodotto;
-    }
-
-    public void setProdotto(Prodotto prodotto) {
-        this.prodotto = prodotto;
-    }
-
     public Carrello getCarrello() {
         return carrello;
     }
 
     public void setCarrello(Carrello carrello) {
         this.carrello = carrello;
+    }
+
+    public Prodotto getProdotto() {
+        return prodotto;
+    }
+
+    public void setProdotto(Prodotto prodotto) {
+        this.prodotto = prodotto;
     }
 
     @Override

@@ -1,9 +1,5 @@
 package servlets.informazioni;
 
-import java.io.IOException;
-import java.io.Serial;
-import java.util.List;
-
 import entities.Informazioni;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
@@ -12,7 +8,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.informazioni.InformazioniJPA;
-import utils.ParametersValidation;
+import repository.utente.UtenteJPA;
+
+import java.io.IOException;
+import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/InformazioniServlet")
 public class InformazioniServlet extends HttpServlet implements Servlet {
@@ -20,17 +20,16 @@ public class InformazioniServlet extends HttpServlet implements Servlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final ParametersValidation pv = new ParametersValidation();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String informazioniID = req.getParameter("informazioniID");
-        if (pv.isValidString(informazioniID)) {
-            Informazioni informazioni = new InformazioniJPA().findById(Integer.parseInt(req.getParameter("informazioniID")));
-            req.setAttribute("informazioni", informazioni);
-            req.getRequestDispatcher("informazioni.jsp").forward(req, resp);
-        } else {
-            resp.sendRedirect("test.jsp");
+        List<Informazioni> informazioni = new UtenteJPA().findById("uID").getInformazioni();
+        for (Informazioni informazione : informazioni) {
+            if (informazione != null) {
+                req.setAttribute("informazioni", informazione);
+                req.getRequestDispatcher("informazioni.jsp").forward(req, resp);
+            } else {
+                resp.sendRedirect("test.jsp");
+            }
         }
     }
 

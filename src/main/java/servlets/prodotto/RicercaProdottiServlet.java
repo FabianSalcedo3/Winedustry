@@ -1,111 +1,60 @@
 package servlets.prodotto;
 
-import java.io.IOException;
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import entities.Prodotto;
+import entities.prodotto.Prodotto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.prodotto.ProdottoJPA;
-import utils.ParametersValidation;
+import repository.prodotto.vino.VinoJPA;
+
+import java.io.IOException;
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @WebServlet("/RicercaProdottiServlet")
 public class RicercaProdottiServlet extends HttpServlet {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-	private static final ParametersValidation pv = new ParametersValidation();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int ricercaBy = Integer.parseInt(req.getParameter("ricercaBy"));
+        List<Prodotto> prodotti = new ArrayList<>();
+        switch (ricercaBy) {
+            case 1 -> prodotti.addAll(new ProdottoJPA().findByAnnata(Integer.parseInt(req.getParameter("prodottoAnnata"))));
+            case 2 -> prodotti.addAll(new ProdottoJPA().findByFormato(Double.parseDouble(req.getParameter("prodottoFormato"))));
+            case 3 -> prodotti.addAll(new ProdottoJPA().findByGradazione(Integer.parseInt(req.getParameter("prodottoGradazione"))));
+            case 4 -> prodotti.addAll(new VinoJPA().findByCategoria(req.getParameter("prodottoCategoria")));
+            case 5 -> prodotti.addAll(new VinoJPA().findByVitigno(req.getParameter("prodottoVitigno")));
+        }
+        if (!prodotti.isEmpty()) {
+            req.setAttribute("prodotti", prodotti);
+            req.getRequestDispatcher("prodotto.jsp").forward(req, resp);
+        } else {
+            resp.sendRedirect("prodotti.jsp");
+        }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String prodottoAnnata = req.getParameter("prodottoAnnata");
-		String prodottoFormato = req.getParameter("prodottoFormato");
-		String prodottoGradazione = req.getParameter("prodottoGradazione");
-		String prodottoCategoria = req.getParameter("prodottoCategoria");
-		String prodottoVitigno = req.getParameter("prodottoVitigno");
+    }
 
-		if (pv.isValidInteger(prodottoVitigno)) {
-			List<Prodotto> prodottiByAnnata = new ProdottoJPA().findBySomethingList("where annata = ?1", prodottoAnnata);
-			if (!prodottiByAnnata.isEmpty()) {
-				req.setAttribute("prodotti", prodottiByAnnata);
-				req.getRequestDispatcher("regione.jsp").forward(req, resp);
-				return;
-			}
-		} else if (pv.isValidDouble(prodottoFormato)) {
-			List<Prodotto> prodottiByFormato = new ProdottoJPA().findBySomethingList("where formato = ?1", prodottoFormato);
-			if (!prodottiByFormato.isEmpty()) {
-				req.setAttribute("prodotti", prodottiByFormato);
-				req.getRequestDispatcher("regione.jsp").forward(req, resp);
-				return;
-			}
-		} else if (pv.isValidInteger(prodottoGradazione)) {
-			List<Prodotto> prodottiByGradazione = new ProdottoJPA().findBySomethingList("where gradazione = ?1", prodottoGradazione);
-			if (!prodottiByGradazione.isEmpty()) {
-				req.setAttribute("prodotti", prodottiByGradazione);
-				req.getRequestDispatcher("regione.jsp").forward(req, resp);
-				return;
-			}
-		} else if (pv.isValidString(prodottoCategoria)) {
-			List<Prodotto> prodottiByCategoria = new ProdottoJPA().findBySomethingList("where categoria = ?1", prodottoCategoria);
-			if (!prodottiByCategoria.isEmpty()) {
-				req.setAttribute("prodotti", prodottiByCategoria);
-				req.getRequestDispatcher("regione.jsp").forward(req, resp);
-				return;
-			}
-		} else if (pv.isValidString(prodottoVitigno)) {
-			List<Prodotto> prodottiByVitigno = new ProdottoJPA().findBySomethingList("where vitigno = ?1", prodottoVitigno);
-			if (!prodottiByVitigno.isEmpty()) {
-				req.setAttribute("prodotti", prodottiByVitigno);
-				req.getRequestDispatcher("regione.jsp").forward(req, resp);
-				return;
-			}
-		}
-		resp.sendRedirect("test.jsp");
-	}
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String value = req.getParameter("ricercaProdotto");
-		if (value != null && !value.isEmpty()) {
-			HashMap<Integer, Prodotto> prodottiTemp = new HashMap<>();
-			if (pv.isInteger(value)) {
-				List<Prodotto> prodottiByAnnata = new ProdottoJPA().findBySomethingList("where annata = ?1", value);
-				if (!prodottiByAnnata.isEmpty()) {
-					prodottiByAnnata.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
-				}
-				List<Prodotto> prodottiByGradazione = new ProdottoJPA().findBySomethingList("where gradazione = ?1", value);
-				if (!prodottiByGradazione.isEmpty()) {
-					prodottiByGradazione.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
-				}
-			} else if (pv.isDouble(value)) {
-				List<Prodotto> prodottiByFormato = new ProdottoJPA().findBySomethingList("where formato = ?1", value);
-				if (!prodottiByFormato.isEmpty()) {
-					prodottiByFormato.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
-				}
-			} else {
-				List<Prodotto> prodottiByCategoria = new ProdottoJPA().findBySomethingList("where categoria like ?1", value + "%");
-				if (!prodottiByCategoria.isEmpty()) {
-					prodottiByCategoria.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
-				}
-				List<Prodotto> prodottiByVitigno = new ProdottoJPA().findBySomethingList("where vitigno like ?1", value + "%");
-				if (!prodottiByVitigno.isEmpty()) {
-					prodottiByVitigno.forEach(prodotto -> prodottiTemp.put(prodotto.getId(), prodotto));
-				}
-			}
-			if (!prodottiTemp.isEmpty()) {
-				List<Prodotto> prodotti = new ArrayList<>(prodottiTemp.values());
-				req.setAttribute("prodotti", prodotti);
-				req.getRequestDispatcher("regione.jsp").forward(req, resp);
-				return;
-			}
-		}
-		resp.sendRedirect("test.jsp");
-	}
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String value = req.getParameter("prodottoValue");
+        HashMap<Integer, Prodotto> prodotti = new HashMap<>();
+        new ProdottoJPA().findByAnnata(Integer.parseInt(value)).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        new ProdottoJPA().findByGradazione(Integer.parseInt(value)).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        new ProdottoJPA().findByFormato(Double.parseDouble(value)).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        new VinoJPA().findByCategoria(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        new VinoJPA().findByVitigno(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        if (!prodotti.values().isEmpty()) {
+            req.setAttribute("prodotti", prodotti.values());
+            req.getRequestDispatcher("regione.jsp").forward(req, resp);
+            return;
+        }
+        resp.sendRedirect("test.jsp");
+    }
 
 }
