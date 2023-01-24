@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap");
+
+
+a {
+  color: #ebebeb;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  color: #ebebeb;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%), url(sfondo2.png);
+}
+
+p{
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: large;
+}
+h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  text-align: center;
+  color: #313131;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-family: 'Dancing Script', cursive;
+  /* font-size: 2rem; */
+  text-align: center;
+  color: #313131;
+  letter-spacing: 0.2rem;
+}
+
+.finestracard{
+/* height: 55vh; */
+width: 250px; 
+margin-left: 20px;
+margin-right: 20px;
+/* glassmorfismo: */
+background: rgba(255, 255, 255, 0.5);
+box-shadow: 0 8px 32px 0 rgba(135, 31, 31, 0.159);
+backdrop-filter: blur( 2px );
+-webkit-backdrop-filter: blur( 2px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+
+
+
+
+
+
+
+/* CSS DI JASMEEN */
+
+
+    /* quadrante */
+    .profile-container {
+      width: 40vw;
+      height: 70vh;
+      overflow: auto;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(135, 31, 31, 0.159);
+      backdrop-filter: blur( 2px );
+      -webkit-backdrop-filter: blur( 2px );
+      border-radius: 10px;
+      border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+
+
+   

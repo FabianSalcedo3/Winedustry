@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap");
+
+/* a { */
+/*   color: #ebebeb; */
+/*   text-decoration: none; */
+/* } */
+
+.corpo {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  color: #ebebeb;
+  background: black;
+}
+
+p{
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: large;
+}
+.titolino {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(1rem, 5vw, 5rem);
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
+  color: #cccccc;
+  text-transform: uppercase;
+
+}
+
+
+section {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  visibility: hidden;
+}
+section .outer,
+section .inner {
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+section .bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+}
+section .bg h2 {
+  z-index: 2;
+}
+section .bg .clip-text {
+  overflow: hidden;
+}
+
+.first .bg {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%), url(sfondoOpacita40.png);
+}
+
+.second .bg {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%), url(sfondo2.png);
+}
+
+
+.finestracard{
+height: auto;
+width: 250px; 
+margin-left: 20px;
+margin-right: 20px;
+/* glassmorfismo: */
+background: rgba(255, 255, 255, 0.5);
+box-shadow: 0 8px 32px 0 rgba(135, 31, 31, 0.159);
+backdrop-filter: blur( 2px );
+-webkit-backdrop-filter: blur( 2px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+/* .icona-user{ */
+/* 	background-image: url("/Winedustry/src/main/webapp/HeadFoot/iconauser.png"); */
+/* } */

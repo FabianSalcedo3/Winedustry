@@ -1,5 +1,7 @@
 package repository;
 
+import entities.Utente;
+
 import java.util.List;
 
 public interface InterfaceDataSourceJPA<T, PK> {

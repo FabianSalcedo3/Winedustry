@@ -21,11 +21,6 @@
         <class>entities.prodotto.alcolico.Champagne</class>
         <class>entities.prodotto.alcolico.Birra</class>
         <class>entities.prodotto.alcolico.Bollicine</class>
-        
-        <class>entities.Indirizzo</class>
-        <class>entities.Informazioni</class>
-        <class>entities.Regione</class>
-        <class>entities.Utente</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
