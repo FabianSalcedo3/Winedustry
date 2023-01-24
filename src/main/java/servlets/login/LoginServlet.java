@@ -54,12 +54,10 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("home/home.jsp");
             return;
         } else if (!isValidPassword.get()) {
-            System.out.println("password errata");
             req.setAttribute("errorPassword", true);
             req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
             return;
         }
-        System.out.println("username non trovato");
         req.setAttribute("errorUsername", false);
         req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
     }

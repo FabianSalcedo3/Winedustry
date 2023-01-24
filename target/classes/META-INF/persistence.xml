@@ -25,8 +25,8 @@
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/winedustry"/>
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="admin123"/>
+            <property name="jakarta.persistence.jdbc.user" value="profilatore"/>
+            <property name="jakarta.persistence.jdbc.password" value="JAITA72"/>
         </properties>
     </persistence-unit>
 </persistence>
