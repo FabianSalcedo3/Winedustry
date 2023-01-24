@@ -1,3 +1,4 @@
 <web-app>
     <display-name>Winedustry</display-name>
+    <welcome></welcome>
 </web-app>
