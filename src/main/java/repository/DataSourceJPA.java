@@ -1,6 +1,7 @@
 package repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 

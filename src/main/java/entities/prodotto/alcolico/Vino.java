@@ -16,12 +16,13 @@ public class Vino extends Alcolico {
     @Column(name = "denominazione", length = 50)
     private String denominazione;
 
+    @Column(name = "annata", length = 12)
+    private String annata;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "regione_id")
     private Regione regione;
 
-    @Column(name = "annata")
-    private int annata;
 
     public String getCategoria() {
         return categoria;
@@ -55,11 +56,11 @@ public class Vino extends Alcolico {
         this.regione = regione;
     }
 
-    public int getAnnata() {
+    public String getAnnata() {
         return annata;
     }
 
-    public void setAnnata(int annata) {
+    public void setAnnata(String annata) {
         this.annata = annata;
     }
 

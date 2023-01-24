@@ -1,10 +1,10 @@
 package controller;
 
-import repository.datasource.PagamentoJPA;
+import repository.datasource.prodotto.ChampagneJPA;
 
 public class Init {
     public static void main(String[] args) {
-        new PagamentoJPA().findAll().forEach(System.out::println);
+        new ChampagneJPA().findAll().forEach(System.out::println);
     }
 }
 

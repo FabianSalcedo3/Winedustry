@@ -1,6 +1,7 @@
 package repository.datasource.prodotto;
 
 import entities.prodotto.Prodotto;
+import entities.prodotto.alcolico.Spirito;
 import repository.DataSourceJPA;
 
 import java.util.List;
