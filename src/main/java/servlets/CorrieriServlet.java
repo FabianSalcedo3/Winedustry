@@ -1,6 +1,5 @@
 package servlets;
 
-import entities.Corriere;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +10,8 @@ import repository.datasource.CorriereJPA;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
+
+import entities.ordine.Corriere;
 
 @WebServlet("/CorrieriServlet")
 public class CorrieriServlet extends HttpServlet {

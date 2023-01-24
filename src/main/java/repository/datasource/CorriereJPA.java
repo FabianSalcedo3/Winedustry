@@ -1,7 +1,7 @@
 package repository.datasource;
 
 
-import entities.Corriere;
+import entities.ordine.Corriere;
 import repository.DataSourceJPA;
 
 public class CorriereJPA extends DataSourceJPA<Corriere, String>{
