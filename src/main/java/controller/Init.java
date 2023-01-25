@@ -1,11 +1,9 @@
 package controller;
 
-import repository.datasource.prodotto.ChampagneJPA;
+import repository.datasource.UtenteJPA;
 
 public class Init {
     public static void main(String[] args) {
-        new ChampagneJPA().findAll().forEach(System.out::println);
+//    	new UtenteJPA().findById("87").getCarrello().get(0).getCarrelloItems().forEach(System.out::println);
     }
 }
-
-

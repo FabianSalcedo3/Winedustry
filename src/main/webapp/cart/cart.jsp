@@ -2,7 +2,9 @@
     pageEncoding="utf-8"%>
     <!DOCTYPE html>
 <%@ page import="entities.Regione"%>
-<%@ page import="entities.Prodotto"%>
+<%@ page import="entities.prodotto.Prodotto"%>
+<%@ page import="entities.ordine.Carrello"%>
+<%@ page import="entities.ordine.CarrelloItem"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <html>
@@ -17,8 +19,8 @@
 </head>
 
 <body>
-	<% List<Prodotto> listaProdotti = (List<Prodotto>)request.getAttribute("listaProdotti");
-	String img = "https://www.signorvino.com/dw/image/v2/BCXQ_PRD/on/demandware.static/-/Sites-SGV_EC_COM/default/dwb374350e/images/VFR021102021-F.png?sw=500";
+	<% Carrello carrello = (Carrello)request.getAttribute("carrello");
+	List<CarrelloItem> listaProdotti = carrello.getCarrelloItems();
 	int totale = 0;%>
     <main class="page">
         <section class="shopping-cart dark">
@@ -31,34 +33,29 @@
                     <div class="row">
                         <div class="col-md-12 col-lg-8">
                             <div class="items">
-                            	<%for(Prodotto prodotto : listaProdotti){ 
-                            		totale+=prodotto.getPrezzo(); %>
+                            	<%for(CarrelloItem item : listaProdotti){ 
+                            		totale+=(item.getProdotto().getPrezzo()*item.getQuantita()); %>
                             		<div class="product">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <img class="img-fluid mx-auto d-block image"
-                                                src="<%=prodotto.getImmagine()%>">
+                                                src="<%=item.getProdotto().getImmagine()%>">
 	                                        </div>
 	                                        <div class="col-md-8">
 	                                            <div class="info">
 	                                                <div class="row">
 	                                                    <div class="col-md-5 product-name">
 	                                                        <div class="product-name">
-	                                                            <a href="#"><%=prodotto.getNome()%></a>
-<!-- 	                                                            <div class="product-info"> -->
-<%-- 	                                                                <div>Uva: <span class="value"><%=prod.getUva()%></span></div> --%>
-<%-- 	                                                                <div>Gradi: <span class="value"><%=prod.getGradi()%></span></div> --%>
-<%-- 	                                                                <div>Sapore: <span class="value"><%=prod.getSapore()%></span></div> --%>
-<!-- 	                                                            </div> -->
+	                                                            <a href="#"><%=item.getProdotto().getNome()%></a>
 	                                                        </div>
 	                                                    </div>
 	                                                    <div class="col-md-4 quantity">
 	                                                        <label for="quantity">Quantità:</label>
-	                                                        <input id="quantity" type="number" value="1"
+	                                                        <input id="quantity" type="number" value="<%=item.getQuantita()%>"
 	                                                            class="form-control quantity-input">
 	                                                    </div>
 	                                                    <div class="col-md-3 price">
-	                                                        <span>&euro; <%=prod.getPrezzo()%></span>
+	                                                        <span>&euro; <%=item.getProdotto().getPrezzo()*item.getQuantita()%></span>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
@@ -84,7 +81,9 @@
 	                                    <span class="text">Totale</span>
 	                                    <span class="price">&euro; <%=totale+5%></span>
 	                                </div>
-	                                <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+	                                <form action="pagamento/pagamento.html">
+	                                <button type="submit" class="btn btn-primary btn-lg btn-block">Checkout</button>
+	                                </form>
 	                            </div>
                             </div>
                         </div>

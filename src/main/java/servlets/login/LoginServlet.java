@@ -1,5 +1,11 @@
 package servlets.login;
 
+import java.io.IOException;
+import java.io.Serial;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import entities.Utente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,12 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import repository.datasource.UtenteJPA;
-
-import java.io.IOException;
-import java.io.Serial;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -35,14 +35,14 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         AtomicBoolean isValidUsername = new AtomicBoolean(false);
         AtomicBoolean isValidPassword = new AtomicBoolean(false);
-        AtomicReference<Utente> utente = new AtomicReference<Utente>();
+        AtomicInteger uID = new AtomicInteger();
         List<Utente> utenti = new UtenteJPA().findAll();
         utenti.forEach(user -> {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 isValidUsername.set(true);
                 if (user.getPassword().equals(password)) {
                     isValidPassword.set(true);
-                    utente.set(user);
+                    uID.set(user.getId());
                 }
             }
         });
@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
                 oldSession.invalidate();
             }
             HttpSession currentSession = req.getSession();
-            currentSession.setAttribute("utente", utente.get());
+            currentSession.setAttribute("uID", uID.get());
             currentSession.setMaxInactiveInterval(30 * 60);
             resp.sendRedirect("home/home.jsp");
             return;

@@ -1,18 +1,20 @@
 package servlets.prodotto;
 
+import java.io.IOException;
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import entities.prodotto.Prodotto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import repository.datasource.RegioneJPA;
+import repository.datasource.prodotto.ProdottoJPA;
 import repository.datasource.prodotto.VinoJPA;
-
-import java.io.IOException;
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 @WebServlet("/RicercaProdottiServlet")
 public class RicercaProdottiServlet extends HttpServlet {
@@ -38,19 +40,23 @@ public class RicercaProdottiServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String value = req.getParameter("prodottoValue");
+        String value = req.getParameter("pValue");
         HashMap<Integer, Prodotto> prodotti = new HashMap<>();
         if(isValidNumber(value)) {
         	new VinoJPA().findByAnnata(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        	new ProdottoJPA().findByPrezzo(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
         }
         new VinoJPA().findByCategoria(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
         new VinoJPA().findByVitigno(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        new VinoJPA().findByRegione(new RegioneJPA().findByNome(value)).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
         if (!prodotti.values().isEmpty()) {
-            req.setAttribute("prodotti", prodotti.values());
-            req.getRequestDispatcher("regione.jsp").forward(req, resp);
+        	List<Prodotto> listaProdotti = new ArrayList<>();
+        	prodotti.values().forEach(prodotto -> listaProdotti.add(prodotto));
+            req.setAttribute("prodotti",listaProdotti );
+            req.getRequestDispatcher("shop/shop.jsp").forward(req, resp);
             return;
         }
-        resp.sendRedirect("test.jsp");
+        resp.sendRedirect("home/home.jsp");
     }
     
     private boolean isValidNumber(String value) {

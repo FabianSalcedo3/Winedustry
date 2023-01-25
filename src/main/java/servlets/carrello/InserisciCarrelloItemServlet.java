@@ -1,7 +1,6 @@
 package servlets.carrello;
 
 import entities.prodotto.Prodotto;
-import entities.Utente;
 import entities.ordine.Carrello;
 import entities.ordine.CarrelloItem;
 import jakarta.servlet.Servlet;
@@ -11,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.datasource.CarrelloItemJPA;
+import repository.datasource.UtenteJPA;
 import repository.datasource.prodotto.ProdottoJPA;
 
 import java.io.IOException;
@@ -25,22 +25,24 @@ public class InserisciCarrelloItemServlet extends HttpServlet implements Servlet
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Prodotto> prodotti = new ProdottoJPA().findAll();
-		req.setAttribute("prodotti", prodotti);
 		int quantita = Integer.parseInt(req.getParameter("pQuantita"));
 		Prodotto prodotto = new ProdottoJPA().findById(req.getParameter("pID"));
-		Carrello carrello = ((Utente) req.getSession().getAttribute("utente")).getCarrello().get(0);
+		int uID = (Integer)req.getSession().getAttribute("uID");
+		Carrello carrello = new UtenteJPA().findById(uID).getCarrello().get(0);
 		List<CarrelloItem> carrelloItems = carrello.getCarrelloItems();
 		for (CarrelloItem carrelloItem : carrelloItems) {
 			if (carrelloItem.getProdotto().getId() == prodotto.getId()) {
 				carrelloItem.setCarrello(carrello);
 				carrelloItem.setProdotto(prodotto);
-				carrelloItem.setQuantita(quantita);
+				carrelloItem.setQuantita(carrelloItem.getQuantita() + quantita);
 				new CarrelloItemJPA().update(carrelloItem);
+				req.setAttribute("prodotti", new ProdottoJPA().findAll());
+				req.getRequestDispatcher("shop/shop.jsp").forward(req, resp);
 				return;
 			}
 		}
 		new CarrelloItemJPA().save(new CarrelloItem(quantita, carrello, prodotto));
+		req.setAttribute("prodotti", new ProdottoJPA().findAll());
 		req.getRequestDispatcher("shop/shop.jsp").forward(req, resp);
 	}
 }

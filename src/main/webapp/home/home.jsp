@@ -43,7 +43,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span> 							
-							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=5">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=8">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -67,7 +67,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span> 
-							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=3">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=6">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -92,7 +92,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span>
-							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=2">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=5">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -117,7 +117,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span> 
-							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=4">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=7">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"

@@ -52,7 +52,8 @@ public class RegisterServlet extends HttpServlet {
                 oldSession.invalidate();
             }
             HttpSession currentSession = req.getSession();
-            currentSession.setAttribute("utente", utente);
+            int uID = new UtenteJPA().findByUsername(username).getId();
+            currentSession.setAttribute("uID", uID);
             currentSession.setMaxInactiveInterval(30 * 60);
             resp.sendRedirect("home/home.jsp");
             return;

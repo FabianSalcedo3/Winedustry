@@ -24,7 +24,7 @@ public class ProdottoJPA extends DataSourceJPA<Prodotto, String> {
     }
 
     public List<Prodotto> findByPrezzo(String prezzo) {
-        return super.findBySomethingList("where prezzo=?1", prezzo);
+        return super.findBySomethingList("where prezzo>=?1", prezzo);
     }
 
     public List<Prodotto> findByValutazione(String valutazione) {

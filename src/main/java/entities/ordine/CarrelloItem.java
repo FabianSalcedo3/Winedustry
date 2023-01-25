@@ -16,7 +16,7 @@ public class CarrelloItem {
     private int quantita;
 
     @OneToOne
-    @JoinColumn(name = "carrello_id")
+    @JoinColumn(name = "carrello_id", unique = true)
     private Carrello carrello;
 
     @OneToOne

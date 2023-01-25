@@ -27,8 +27,9 @@ public class InserisciPagamentoServlet extends HttpServlet {
         String proprietario = req.getParameter("cProprietario");
         LocalDate dataScadenza = LocalDate.parse(req.getParameter("cDataScadenza"));
         int cvv = Integer.parseInt(req.getParameter("cCvv"));
-        Utente utente = new UtenteJPA().findById(req.getParameter("uID"));
-        List<Pagamento> pagamenti = new UtenteJPA().findById(req.getParameter("uID")).getPagamenti();
+        int uID = (Integer)req.getSession().getAttribute("uID");
+        Utente utente = new UtenteJPA().findById(uID);
+        List<Pagamento> pagamenti = new UtenteJPA().findById(uID).getPagamenti();
         for (Pagamento pagamento : pagamenti) {
             if (pagamento != null) {
                 pagamento.setCarta(nome);

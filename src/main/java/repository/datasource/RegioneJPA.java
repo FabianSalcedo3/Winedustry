@@ -9,4 +9,8 @@ public class RegioneJPA extends DataSourceJPA<Regione, String>{
         super(Regione.class);
     }
 
+	public Regione findByNome(String nome) {
+		return super.findBySomething("where nome=?1",nome);
+	}
+
 }

@@ -21,7 +21,8 @@ public class IndirizziServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Indirizzo> indirizzi = new UtenteJPA().findById(req.getParameter("uID")).getIndirizzi();
+    	int uID = (Integer)req.getSession().getAttribute("uID");
+        List<Indirizzo> indirizzi = new UtenteJPA().findById(uID).getIndirizzi();
         for (Indirizzo indirizzo : indirizzi) {
             if (indirizzo != null) {
                 req.setAttribute("indirizzo", indirizzo);

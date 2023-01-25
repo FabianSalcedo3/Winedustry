@@ -21,7 +21,8 @@ public class PagamentoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Pagamento> pagamenti = new UtenteJPA().findById(req.getParameter("uID")).getPagamenti();
+    	int uID = (Integer)req.getSession().getAttribute("uID");
+        List<Pagamento> pagamenti = new UtenteJPA().findById(uID).getPagamenti();
         for (Pagamento pagamento : pagamenti) {
             if (pagamento != null) {
                 req.setAttribute("pagamento", pagamento);

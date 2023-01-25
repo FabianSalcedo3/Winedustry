@@ -26,8 +26,9 @@ public class InserisciIndirizzoServlet extends HttpServlet {
         int cap = Integer.parseInt(req.getParameter("uCap"));
         String citta = req.getParameter("uCitta");
         String provincia = req.getParameter("uProvincia");
-        Utente utente = new UtenteJPA().findById(req.getParameter("uID"));
-        List<Indirizzo> indirizzi = new UtenteJPA().findById(req.getParameter("uID")).getIndirizzi();
+        int uID = (Integer)req.getSession().getAttribute("uID");
+        Utente utente = new UtenteJPA().findById(uID);
+        List<Indirizzo> indirizzi = new UtenteJPA().findById(uID).getIndirizzi();
         for (Indirizzo indirizzo : indirizzi) {
             if (indirizzo != null) {
                 indirizzo.setVia(via);

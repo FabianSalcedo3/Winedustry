@@ -1,5 +1,10 @@
 package servlets.carrello;
 
+import java.io.IOException;
+import java.io.Serial;
+import java.util.List;
+
+import entities.Utente;
 import entities.ordine.Carrello;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
@@ -10,10 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import repository.datasource.CarrelloJPA;
 import repository.datasource.UtenteJPA;
 
-import java.io.IOException;
-import java.io.Serial;
-import java.util.List;
-
 @WebServlet("/CarrelliServlet")
 public class CarrelliServlet extends HttpServlet implements Servlet {
 
@@ -22,12 +23,13 @@ public class CarrelliServlet extends HttpServlet implements Servlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Carrello carrello = new UtenteJPA().findById(req.getParameter("uID")).getCarrello().get(0);
+    	Utente utente = new UtenteJPA().findById((Integer)req.getSession().getAttribute("uID"));
+        Carrello carrello = utente.getCarrello().get(0);
         if (carrello != null) {
             req.setAttribute("carrello", carrello);
-            req.getRequestDispatcher("carrello.jsp").forward(req, resp);
+            req.getRequestDispatcher("cart/cart.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect("test.jsp");
+            resp.sendRedirect("home/home.jsp");
         }
     }
 

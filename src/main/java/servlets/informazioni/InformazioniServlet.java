@@ -22,7 +22,8 @@ public class InformazioniServlet extends HttpServlet implements Servlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Informazioni> informazioni = new UtenteJPA().findById("uID").getInformazioni();
+    	int uID = (Integer)req.getSession().getAttribute("uID");
+        List<Informazioni> informazioni = new UtenteJPA().findById(uID).getInformazioni();
         for (Informazioni informazione : informazioni) {
             if (informazione != null) {
                 req.setAttribute("informazioni", informazione);

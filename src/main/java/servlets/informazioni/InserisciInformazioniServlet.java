@@ -27,7 +27,8 @@ public class InserisciInformazioniServlet extends HttpServlet {
         String codiceFiscale = req.getParameter("uCodiceFiscale");
         LocalDate dataNascita = LocalDate.parse(req.getParameter("uDataNascita"));
         String telefono = req.getParameter("uTelefono");
-        Utente utente = new UtenteJPA().findById(req.getParameter("uID"));
+        int uID = (Integer)req.getSession().getAttribute("uID");
+        Utente utente = new UtenteJPA().findById(uID);
         List<Informazioni> informazioni = utente.getInformazioni();
         for (Informazioni informazione : informazioni) {
             if (informazione != null) {
