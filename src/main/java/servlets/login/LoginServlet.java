@@ -12,6 +12,8 @@ import repository.datasource.UtenteJPA;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -31,29 +33,37 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        AtomicBoolean isValidUsername = new AtomicBoolean(false);
+        AtomicBoolean isValidPassword = new AtomicBoolean(false);
+        AtomicReference<Utente> utente = new AtomicReference<Utente>();
         List<Utente> utenti = new UtenteJPA().findAll();
-        for (Utente utente : utenti) {
-            if (utente.getUsername().equalsIgnoreCase(username)) {
-                if (utente.getPassword().equalsIgnoreCase(password)) {
-                    HttpSession oldSession = req.getSession(false);
-                    if (oldSession != null) {
-                        oldSession.invalidate();
-                    }
-                    HttpSession currentSession = req.getSession();
-                    currentSession.setAttribute("user", username);
-                    currentSession.setMaxInactiveInterval(15 * 60);
-                    resp.sendRedirect("home/home.jsp");
-                } else {
-                    System.out.println("password errata");
-                    req.setAttribute("errorPassword", true);
-                    req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
+        utenti.forEach(user -> {
+            if (user.getUsername().equalsIgnoreCase(username)) {
+                isValidUsername.set(true);
+                if (user.getPassword().equals(password)) {
+                    isValidPassword.set(true);
+                    utente.set(user);
                 }
-                return;
             }
+        });
+        if (isValidUsername.get() && isValidPassword.get()) {
+            HttpSession oldSession = req.getSession(false);
+            if (oldSession != null) {
+                oldSession.invalidate();
+            }
+            HttpSession currentSession = req.getSession();
+            currentSession.setAttribute("utente", utente.get());
+            currentSession.setMaxInactiveInterval(30 * 60);
+            resp.sendRedirect("home/home.jsp");
+            return;
+        } else if (!isValidPassword.get()) {
+            System.out.println("password errata");
+            req.setAttribute("errorPassword", true);
+            req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
+            return;
         }
         System.out.println("username non trovato");
         req.setAttribute("errorUsername", false);
         req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
     }
-
 }

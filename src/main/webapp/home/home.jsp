@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="entities.Utente"%>
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <title>Winedustry - Home Page</title>
-<link href="stylehome.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/home/stylehome.css" rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -19,7 +19,7 @@
 </head>
 
 <body class="sfondohome">
-	<%@ include file="../HeadFoot/navbar.jsp" %>
+	<%@ include file="../HeadFoot/navbar.jsp"%>
 		<div class="row" style="margin-right: 0px;">
 			<!-- primo col di 3 -->
 			<div class="col-md-3">
@@ -43,7 +43,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span> 							
-							<a href="../RegioniServlet?regioneID=5">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=5">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -67,7 +67,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span> 
-							<a href="../RegioniServlet?regioneID=3">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=3">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -92,7 +92,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span>
-							<a href="../RegioniServlet?regioneID=2">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=2">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -117,7 +117,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span> 
-							<a href="../RegioniServlet?regioneID=4">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=4">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -141,7 +141,7 @@
 					<div class="item-hints">
 						<div class="hint" data-position="4">
 							<span class="hint-radius"></span> 
-							<a href="../RegioniServlet?regioneID=1">
+							<a href="<%=request.getContextPath()%>/RegioniServlet?regioneID=1">
 								<span class="hint-dot"></span>
 							</a>
 							<div class="hint-content do--split-children glassmorfismo"
@@ -162,7 +162,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-	<script src="./scriptmenu.js"></script>
+	<script src="<%=request.getContextPath()%>/home/scriptmenu.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

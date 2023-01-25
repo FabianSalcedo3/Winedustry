@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="test.entities.Indirizzo"%>
-<%@ page import="test.entities.Utente"%>
+<%@ page import="entities.Indirizzo"%>
+<%@ page import="entities.Informazioni"%>
+<%@ page import="entities.Utente"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="stylesheet" href="personale/styleareapersonale.css"> <!-- CONTROLLARE !!!!!!!!!!!!!!!! -->
+<link rel="stylesheet" href="area-personale/styleareapersonale.css">
 </head>
 <body>
-	<% Utente utente = (Utente)request.getAttribute("utente"); 
-	Indirizzo indirizzo = (Indirizzo)request.getAttribute("indirizzo");%>
+	<% Utente utente = (Utente)request.getAttribute("utente");
+	Informazioni info = new Informazioni();
+	Indirizzo indirizzo = new Indirizzo();
+	
+	if(!utente.getInformazioni().isEmpty()){
+		info = utente.getInformazioni().get(0);
+	}
+	
+	if(!utente.getIndirizzi().isEmpty()){
+		indirizzo = utente.getIndirizzi().get(0);
+	}
+	%>
 	<!-- qui inizia la finestra dell'area personale -->
 	<div class="finestrona"
 	    style="display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
@@ -27,7 +38,7 @@
 	                        Personale </h1>
 	                </div>
 	                <div class="col-sm-2">
-	                    <img src="personale/modifica.png" style="width: 70px; ">
+	                    <img src="./area-personale/modifica.png" style="width: 70px;">
 	                </div>
 	            </div>
 	        </div>
@@ -47,23 +58,23 @@
 	                        </tr>
 	                        <tr class="spaceUnder">
 	                            <td>Nome</td>
-	                            <td><%=utente.getNome()%></td>
+	                            <td><%=info.getNome()%></td>
 	                        </tr>
 	                        <tr class="spaceUnder">
 	                            <td>Cognome</td>
-	                            <td><%=utente.getCognome()%></td>
+	                            <td><%=info.getCognome()%></td>
 	                        </tr>
 	                        <tr class="spaceUnder">
 	                            <td>Codice Fiscale</td>
-	                            <td><%=utente.getCf()%></td>
+	                            <td><%=info.getCodiceFiscale()%></td>
 	                        </tr>
 	                        <tr class="spaceUnder">
 	                            <td>Data di nascita</td>
-	                            <td><%=utente.getNascita().toString()%></td>
+	                            <td><%=info.getDataNascita()%></td>
 	                        </tr>
 	                        <tr class="spaceUnder">
 	                            <td>Telefono</td>
-	                            <td><%=utente.getTelefono()%></td>
+	                            <td><%=info.getTelefono()%></td>
 	                        </tr>
 	                    </tbody>
 	                </table>
@@ -92,10 +103,10 @@
 	                                <td>Provincia</td>
 	                                <td><%=indirizzo.getProvincia()%></td>
 	                            </tr>
-	                            <tr class="spaceUnder">
-	                                <td>Paese</td>
-	                                <td><%=indirizzo.getPaese()%></td>
-	                            </tr>
+<!-- 	                            <tr class="spaceUnder"> -->
+<!-- 	                                <td>Paese</td> -->
+<%-- 	                                <td><%=indirizzo.getCitta()%></td> --%>
+<!-- 	                            </tr> -->
 	                        </tbody>
 	                    </table>
 	                </div>

@@ -1,13 +1,13 @@
-<link href="../HeadFoot/style.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/HeadFoot/style.css" rel="stylesheet">
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css'>
 <nav class="navbar navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" style="flex-grow: 1; align-self: center; margin-right: 0px;" href="#">
+            <a class="navbar-brand" style="flex-grow: 1; align-self: center; margin-right: 0px;" href="<%=request.getContextPath()%>">
                 <h2 class="titolo">Winedustry</h2>
             </a>
             <div class="cerca">
-                <form action="#" class="search">
+                <form action="<%=request.getContextPath()%>" class="search">
                     <input class="search__input" type="search" placeholder="Cerca vino!" id="searchInput">
                     <div class="search__icon-container">
                         <label for="searchInput" class="search__label" aria-label="Search">
@@ -28,8 +28,8 @@
             </div>
             <div class="area-user">
                 <span data-tooltip="Entra nella tua area personale!" data-flow="left">
-                    <a href="#" class="">
-                    	<img src="../iconauser.png" class="icona-user" style="width: 35px;">
+                <a href="<%=request.getContextPath()%>/UtentiServlet">
+                    	<img src="<%=request.getContextPath()%>/HeadFoot/iconauser.png" class="icona-user" style="width: 35px;">
                     </a>
                 </span>
             </div>
@@ -37,7 +37,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                     style="border: 0px; padding: 0px;">
-                    <img src="../menu.png" style="width: 40px; height: 40px;" class="icona-menu">
+                    <img src="<%=request.getContextPath()%>/HeadFoot/menu.png" style="width: 40px; height: 40px;" class="icona-menu">
                 </button>
             </div>
             <!-- menu a tendina -->
@@ -51,28 +51,26 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" style="text-align: center;">
                         <li class="nav-item">
-                            <a class="link" aria-current="page" href="#">Home</a>
+                            <a class="link" aria-current="page" href="<%=request.getContextPath()%>/home/home.jsp">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="link" href="#">Vini!</a>
+                        	<form action="<%=request.getContextPath()%>/ProdottiServlet" method="post">
+                            	<button class="link" type="submit">Vini!</button>
+                            </form>
                         </li>
                         <li class="nav-item">
-                            <a class="link" href="#">Carrello</a>
+                            <a class="link" href="<%=request.getContextPath()%>">Carrello</a>
                         </li>
                         <li class="nav-item">
-                            <a class="link" href="#">Contattaci</a>
+                            <a class="link" href="<%=request.getContextPath()%>/contattaci/contattaci.html">Contattaci</a>
                         </li>
                         <li>
                             <hr style="color: #b7ac7f; height: 3px;">
                         </li>
                         <li>
                             <span class="nav-link navbar-nav justify-content-end flex-grow-1 pe-3">
-                                “Nel mezzo d'una damigiana di nostra vigna, mi ritrovai in
-                                una botte oscura, che di buon vin era riempita.”
-                                <cite st`yle="color: #ebebeb; font-size: 0.9rem;">
-                                    Dante Alighieri
-                                </cite>
-                            </span>
+                                "Nel mezzo d'una damigian di nostra vigna, mi ritrovai in
+                                una botte oscura, che di buon vin era riempita"<cite style="color: #ebebeb; font-size: 0.9rem;">Dante Alighieri</cite></span>
                         </li>
                     </ul>
                 </div>

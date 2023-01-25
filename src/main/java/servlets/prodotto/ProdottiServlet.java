@@ -25,7 +25,7 @@ public class ProdottiServlet extends HttpServlet {
             req.setAttribute("prodotto", prodotto);
             req.getRequestDispatcher("prodotto/prodotto.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect("home.jsp");
+            resp.sendRedirect("home/home.jsp");
         }
     }
 
@@ -34,9 +34,9 @@ public class ProdottiServlet extends HttpServlet {
         List<Prodotto> prodotti = new ProdottoJPA().findAll();
         if (!prodotti.isEmpty()) {
             req.setAttribute("prodotti", prodotti);
-            req.getRequestDispatcher("vini.jsp").forward(req, resp);
+            req.getRequestDispatcher("shop/shop.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect("test.jsp");
+            resp.sendRedirect("home/home.jsp");
         }
     }
 

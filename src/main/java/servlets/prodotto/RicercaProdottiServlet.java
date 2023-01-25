@@ -25,8 +25,8 @@ public class RicercaProdottiServlet extends HttpServlet {
         int ricercaBy = Integer.parseInt(req.getParameter("ricercaBy"));
         List<Prodotto> prodotti = new ArrayList<>();
         switch (ricercaBy) {
-           case 1 -> prodotti.addAll(new VinoJPA().findByCategoria(req.getParameter("prodottoCategoria")));
-            case 2 -> prodotti.addAll(new VinoJPA().findByVitigno(req.getParameter("prodottoVitigno")));
+           case 1: {prodotti.addAll(new VinoJPA().findByCategoria(req.getParameter("prodottoCategoria")));break;}
+            case 2: {prodotti.addAll(new VinoJPA().findByVitigno(req.getParameter("prodottoVitigno")));break;}
         }
         if (!prodotti.isEmpty()) {
             req.setAttribute("prodotti", prodotti);

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entities.Regione"%>
-<%@ page import="entities.Prodotto"%>
+<%@ page import="entities.prodotto.alcolico.Vino"%>
 <%@ page import="java.util.List"%>
 <%
 Regione regione = (Regione) request.getAttribute("regione");
-List<Prodotto> prodottiRegione = regione.getVini();
+List<Vino> prodottiRegione = regione.getVini();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,7 @@ List<Prodotto> prodottiRegione = regione.getVini();
 			<div class="inner">
 				<div class="bg one">
 					<div class="container text-center">
-						<a type="button" class="btn btn-outline-light top-0 mb-5" href="javascript:history.back()">
+						<a type="button" class="btn btn-outline-light top-0 mb-5" href="<%=request.getContextPath()%>/home/home.jsp">
 							<i class="bi bi-arrow-return-left"></i>
 						</a>                        
 						<h2 class="section-heading titolino"><%=regione.getNome()%></h2>
@@ -59,9 +59,9 @@ List<Prodotto> prodottiRegione = regione.getVini();
 							<% for(int i = 0; i < prodottiRegione.size(); i++){ %>
 								<% if(!prodottiRegione.get(i).equals(null) && i<4) { %>							
 								<div class="col">
-									<div class="finestracard">
+									<div class="finestracard h-100" >
 										<!-- Product image-->
-										<img class="card-img-top" src="<%=prodottiRegione.get(i).getImmagine() %>" alt="..." />
+										<img class="card-img-top" style="width:50%;" src="<%=prodottiRegione.get(i).getImmagine()%>"/>
 										<!-- Product details-->
 										<div class="card-body p-4">
 											<div class="text-center">
@@ -72,7 +72,7 @@ List<Prodotto> prodottiRegione = regione.getVini();
 											</div>
 										</div>
 										<!-- Product actions-->
-										<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+										<div class="card-footer border-top-0 bg-transparent">
 											<div class="text-center">
 												<a class="btn btn-outline-dark mt-auto" href="ProdottiServlet?prodottoID=<%=prodottiRegione.get(i).getId()%>">Vino!</a>
 											</div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="entities.Regione"%>
-<%@ page import="entities.Prodotto"%>
+<%@ page import="entities.prodotto.Prodotto"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
     <title>E-Commerce Product List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="shop/shopStyle.css">
+<!--     <link rel="stylesheet" href="shopStyle.css"> -->
 </head>
 <!-- background-image: linear-gradient(180deg, rgba(70, 69, 69, 0.5) 0%, rgba(51, 50, 50, 0.5) 100%), url('https://upload.wikimedia.org/wikipedia/commons/6/65/Wine_cellar.jpg'); background-size: cover; background-position: left; background-attachment: fixed; background-repeat: no-repeat; -->
 <body style="background-color: #2a2a2a;">
@@ -35,7 +35,7 @@
         <div class="row">
             <!-- filtri -->
             <div class="col-md-3">
-                <div class="card" style="position: fixed; margin-left: 20px; box-shadow: rgba(204, 204, 204, 0.35) 0px 5px 15px;">
+                <div class="card" style="margin-left: 20px; box-shadow: rgba(204, 204, 204, 0.35) 0px 5px 15px;">
                     <div class="card-body">
                         <h5 class="card-title text-center">Filtra</h5>
                         <form>
@@ -89,10 +89,10 @@
                                 <b>Prezzo</b>
                                 <div class="mt-1">
                                     <label for="prezzo-min">Min</label>
-                                    <input type="number" class="small" id="prezzo-min" name="prezzo-min">
-                                    <span>-</span>
-                                    <input type="number" id="prezzo-max" class="small" name="prezzo-max">
+                                    <input type="number" class="form-floating form-control" id="prezzo-min" name="prezzo-min">
                                     <label for="prezzo-max">Max</label>
+                                    <input type="number" id="prezzo-max" class="form-floating form-control" name="prezzo-max">
+                                    
                                 </div>
                             </div>
                             <div class="form-group mb-3">
