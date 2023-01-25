@@ -27,5 +27,9 @@ public class VinoJPA extends DataSourceJPA<Vino, String> {
     public List<Vino> findByRegione(Regione regione) {
         return super.findBySomethingList("where regione=?1", regione);
     }
+    
+    public List<Vino> findByAnnata(String annata) {
+        return super.findBySomethingList("where annata=?1", annata);
+    }
 
 }

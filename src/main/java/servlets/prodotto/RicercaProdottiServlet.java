@@ -40,6 +40,9 @@ public class RicercaProdottiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String value = req.getParameter("prodottoValue");
         HashMap<Integer, Prodotto> prodotti = new HashMap<>();
+        if(isValidNumber(value)) {
+        	new VinoJPA().findByAnnata(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
+        }
         new VinoJPA().findByCategoria(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
         new VinoJPA().findByVitigno(value).forEach(prodotto -> prodotti.put(prodotto.getId(), prodotto));
         if (!prodotti.values().isEmpty()) {
@@ -48,6 +51,15 @@ public class RicercaProdottiServlet extends HttpServlet {
             return;
         }
         resp.sendRedirect("test.jsp");
+    }
+    
+    private boolean isValidNumber(String value) {
+    	try {
+			Integer.parseInt(value);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
     }
 
 }

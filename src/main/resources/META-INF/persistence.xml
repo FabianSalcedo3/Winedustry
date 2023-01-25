@@ -6,22 +6,6 @@
         <!-- Persistence provider -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- Entity classes -->
-        
-        <class>entities.ordine.Carrello</class>
-        <class>entities.ordine.CarrelloItem</class>
-        <class>entities.ordine.Corriere</class>
-        <class>entities.ordine.Ordine</class>
-        <class>entities.ordine.Pagamento</class>
-        <class>entities.ordine.Spedizione</class>
-        
-        <class>entities.prodotto.Prodotto</class>
-        <class>entities.prodotto.alcolico.Alcolico</class>
-        <class>entities.prodotto.alcolico.Spirito</class>
-        <class>entities.prodotto.alcolico.Vino</class>
-        <class>entities.prodotto.alcolico.Champagne</class>
-        <class>entities.prodotto.alcolico.Birra</class>
-        <class>entities.prodotto.alcolico.Bollicine</class>
-
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/winedustry"/>
