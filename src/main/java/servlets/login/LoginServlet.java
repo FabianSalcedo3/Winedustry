@@ -15,6 +15,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import repository.datasource.UtenteJPA;
 
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+import java.io.Serial;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+>>>>>>> branch 'backup' of https://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@github.com/FabianSalcedo3/Winedustry
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
@@ -35,14 +43,25 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         AtomicBoolean isValidUsername = new AtomicBoolean(false);
         AtomicBoolean isValidPassword = new AtomicBoolean(false);
+<<<<<<< HEAD
         AtomicInteger uID = new AtomicInteger();
+=======
+>>>>>>> branch 'backup' of https://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@github.com/FabianSalcedo3/Winedustry
         List<Utente> utenti = new UtenteJPA().findAll();
+<<<<<<< HEAD
         utenti.forEach(user -> {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 isValidUsername.set(true);
                 if (user.getPassword().equals(password)) {
                     isValidPassword.set(true);
                     uID.set(user.getId());
+=======
+        utenti.forEach(utente -> {
+            if (utente.getUsername().equalsIgnoreCase(username)) {
+                isValidUsername.set(true);
+                if (utente.getPassword().equals(password)) {
+                    isValidPassword.set(true);
+>>>>>>> branch 'backup' of https://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@github.com/FabianSalcedo3/Winedustry
                 }
             }
         });
@@ -52,18 +71,29 @@ public class LoginServlet extends HttpServlet {
                 oldSession.invalidate();
             }
             HttpSession currentSession = req.getSession();
+<<<<<<< HEAD
             currentSession.setAttribute("uID", uID.get());
             currentSession.setMaxInactiveInterval(30 * 60);
             resp.sendRedirect("home/home.jsp");
             return;
         } else if (!isValidPassword.get()) {
             System.out.println("password errata");
+=======
+            currentSession.setAttribute("user", username);
+            currentSession.setMaxInactiveInterval(15 * 60);
+            resp.sendRedirect("home/home.jsp");
+            return;
+        } else if (!isValidPassword.get()) {
+>>>>>>> branch 'backup' of https://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@github.com/FabianSalcedo3/Winedustry
             req.setAttribute("errorPassword", true);
             req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
             return;
         }
-        System.out.println("username non trovato");
         req.setAttribute("errorUsername", false);
         req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'backup' of https://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@github.com/FabianSalcedo3/Winedustry
