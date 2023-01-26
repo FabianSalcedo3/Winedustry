@@ -60,7 +60,7 @@ CREATE TABLE prodotto (
     categoria VARCHAR(50) NOT NULL,
     vitigno VARCHAR(50),
     denominazione VARCHAR(50),
-    annata varchar(12) default 'Senza Annata',
+    annata VARCHAR(12) DEFAULT 'Senza Annata',
     regione_id INT REFERENCES regione (id),
     affinamento VARCHAR(50),
     dosaggio VARCHAR(50),
@@ -84,15 +84,17 @@ CREATE TABLE carrello_item (
     id INT PRIMARY KEY AUTO_INCREMENT,
     quantita INT NOT NULL,
     carrello_id INT NOT NULL REFERENCES carrello (id),
-    prodotto_id INT NOT NULL REFERENCES prodotto (id)
+    prodotto_id INT NOT NULL REFERENCES prodotto (id),
+    ordine_id INT REFERENCES ordine (id)
 );
 
 CREATE TABLE ordine (
     id INT PRIMARY KEY AUTO_INCREMENT,
     codice VARCHAR(12) UNIQUE NOT NULL,
-    totale DOUBLE NOT NULL,
-    utente_id INT NOT NULL REFERENCES carrello (utente_id),
-    carrello_id INT NOT NULL REFERENCES carrello (id),
+    totale DOUBLE,
+    evaso BOOLEAN NOT NULL,
+    utente_id INT NOT NULL REFERENCES utente (id),
+    pagamento_id INT REFERENCES pagamento (id),
     spedizione_id INT REFERENCES spedizione (id)
 );
 
@@ -108,5 +110,14 @@ CREATE TABLE spedizione (
     id INT PRIMARY KEY AUTO_INCREMENT,
     codice VARCHAR(12) UNIQUE NOT NULL,
     colli INT NOT NULL,
-    peso INT NOT NULL
+    peso INT NOT NULL,
+    corriere_id INT NOT NULL REFERENCES corriere (id)
+);
+
+CREATE TABLE ordine_item (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    monopolio BOOLEAN NOT NULL DEFAULT TRUE,
+    quantita INT NOT NULL,
+    ordine_id INT NOT NULL REFERENCES ordine (id),
+    prodotto_id INT NOT NULL REFERENCES prodotto (id)
 );
