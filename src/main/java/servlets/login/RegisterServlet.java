@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import repository.datasource.CarrelloJPA;
+import repository.datasource.ordine.CarrelloJPA;
 import repository.datasource.UtenteJPA;
 
 import java.io.IOException;
@@ -52,18 +52,12 @@ public class RegisterServlet extends HttpServlet {
                 oldSession.invalidate();
             }
             HttpSession currentSession = req.getSession();
-<<<<<<< HEAD
             int uID = new UtenteJPA().findByUsername(username).getId();
             currentSession.setAttribute("uID", uID);
             currentSession.setMaxInactiveInterval(30 * 60);
-=======
-            currentSession.setAttribute("user", username);
-            currentSession.setMaxInactiveInterval(15 * 60);
->>>>>>> branch 'backup' of https://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@github.com/FabianSalcedo3/Winedustry
             resp.sendRedirect("home/home.jsp");
             return;
         } else if (!isValidUsername.get()) {
-            System.out.println("username già utilizzato");
             req.setAttribute("errorUsername", true);
             req.getRequestDispatcher("login/registrazione.jsp").forward(req, resp);
             return;

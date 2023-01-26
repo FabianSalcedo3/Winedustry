@@ -20,7 +20,7 @@ public class RicercaOrdiniServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	int uID = (Integer)req.getSession().getAttribute("uID");
+        int uID = (Integer) req.getSession().getAttribute("uID");
         List<Ordine> ordini = new UtenteJPA().findById(uID).getOrdini();
         if (!ordini.isEmpty()) {
             req.setAttribute("ordini", ordini);

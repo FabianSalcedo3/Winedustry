@@ -21,5 +21,4 @@ public interface InterfaceDataSourceJPA<T, PK> {
     List<T> findBySomethingList(String query, Object value);
 
     List<T> findByMore(String query, int nPar, Object[] values);
-
 }

@@ -20,6 +20,10 @@ public class Spedizione {
     @Column(name = "peso", nullable = false)
     private int peso;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "corriere_id")
+    private Corriere corriere;
+
     public int getId() {
         return id;
     }
@@ -50,6 +54,14 @@ public class Spedizione {
 
     public void setPeso(int peso) {
         this.peso = peso;
+    }
+
+    public Corriere getCorriere() {
+        return corriere;
+    }
+
+    public void setCorriere(Corriere corriere) {
+        this.corriere = corriere;
     }
 
     @Override

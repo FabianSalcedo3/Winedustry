@@ -35,4 +35,4 @@ public class ProdottoJPA extends DataSourceJPA<Prodotto, String> {
         return super.findBySomethingList("where nazione=?1", nazione);
     }
 
-}
+ }

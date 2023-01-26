@@ -20,8 +20,8 @@ public class UtentiServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	int uID = (Integer)req.getSession().getAttribute("uID");
-    	Utente utente = new UtenteJPA().findById(uID);
+        int uID = (Integer) req.getSession().getAttribute("uID");
+        Utente utente = new UtenteJPA().findById(uID);
         if (utente != null) {
             req.setAttribute("utente", utente);
             req.getRequestDispatcher("area-personale/area-personale.jsp").forward(req, resp);
